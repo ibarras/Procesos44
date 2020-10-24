@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use App\Helpers\IcUpload;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * IcInstructivo
@@ -10,7 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="ic_instructivo", indexes={@ORM\Index(name="IDX_F2DCB377AE664387", columns={"id_instruccion"}), @ORM\Index(name="IDX_F2DCB37716E7C0E7", columns={"id_solicitud"})})
  * @ORM\Entity
  */
-class IcInstructivo
+class IcInstructivo extends IcUpload
+
 {
     /**
      * @var int
@@ -126,6 +131,39 @@ class IcInstructivo
         $this->idSolicitud = $idSolicitud;
 
         return $this;
+    }
+
+    /**
+     * @Assert\File(maxSize="1M", mimeTypes={"image/png", "image/jpeg", "image/pjpeg"})
+     */
+    private $IcImagen;
+    /**
+     * Set IcImagen
+     * @param UploadedFile $file
+     * @return IcEquipo
+     *
+     */
+    public function setIcImagen(File $file = null)
+    {
+        $img = $this->setFile($file, 'procesos/procedimientos/');
+        $this->imagen = $img;
+
+        return $this;
+
+    }
+
+    /**
+     * Get file
+     * @return file
+     */
+    public function getIcImagen()
+    {
+        return $this->getFile();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 
 

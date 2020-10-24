@@ -15,13 +15,13 @@
                     <div class="card-footer">
                         {% if idescripcion is  empty %}
 
-                            <a href="{{ path('procesos_instructivo_agregar', {'iTrabajo': instruccion_trabajo.id }) }}"
+                            <a href="{{ path('procesos_instructivo_agregar', {'id': instruccion_trabajo.id }) }}"
                                type="button" class="btn btn-primary btn-md" > Agregar Instructivo</a>
 
                         {% endif %}
                         {% if idescripcion is not empty %}
 
-                            <a href="{{ path('procesos_instructivo_mostrar', {'iDescripcion': idescripcion.id }) }}"
+                            <a href="{{ path('procesos_instructivo_mostrar', {'id': idescripcion.id }) }}"
                                type="button" class="btn btn-primary btn-md" > Ver Instructivo</a>
 
                         {% endif %}

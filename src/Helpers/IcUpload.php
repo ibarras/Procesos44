@@ -1,5 +1,5 @@
 <?php
-namespace ProcesosBundle\IcHelpers;
+namespace App\Helpers;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;

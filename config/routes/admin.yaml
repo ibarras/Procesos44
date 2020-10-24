@@ -1,0 +1,315 @@
+# app/config/routing.yml
+
+procesos_upload_file:
+  path: /procesos-upload-files
+  controller: App\Controller\Admin\IcProcesosController::uploadFile
+
+procesos_macroprocesos:
+  path: /club-tijuana-macroprocesos
+  controller: App\Controller\Admin\IcProcesosController::macroprocesos
+
+procesos_procesos:
+  path: /{idMacroproceso}/club-tijuana-macroprocesos-procesos
+  controller: App\Controller\Admin\IcProcesosController::procesos
+  requirements:
+    idMacroproceso: '\d+'
+
+procesos_procesos_agregar:
+  path: /{idMacroproceso}/club-tijuana-agregar-proceso
+  controller: App\Controller\Admin\IcProcesosController::new
+  requirements:
+    idMacroproceso: '\d+'
+
+
+procesos_proceso_editar:
+  path: /{id}/club-tijuana-editar-procesos
+  controller: App\Controller\Admin\IcProcesosController::edit
+  requirements:
+    id: '\d+'
+
+procesos_proceso_eliminar:
+  path: /{id}/club-tijuana-eliminar-procesos
+  controller: App\Controller\Admin\IcProcesosController::delete
+  requirements:
+    id: '\d+'
+
+
+#
+# Procedimientos
+#
+
+procesos_procedimientos:
+  path: /{id}/club-tijuana-procedimientos
+  controller: App\Controller\Admin\IcProcedimientosController::index
+  requirements:
+    id: '\d+'
+
+procesos_procedimientos_agregar:
+  path: /{idProcesos}/club-tijuana-agregar-procedimientos
+  controller: App\Controller\Admin\IcProcedimientosController::new
+  requirements:
+    idProcesos: '\d+'
+
+procesos_procedimientos_editar:
+  path: /{id}/club-tijuana-editar-procedimientos
+  controller: App\Controller\Admin\IcProcedimientosController::edit
+  requirements:
+    id: '\d+'
+
+procesos_procedimientos_mostrar:
+  path: /{id}/club-tijuana-mostrar-procedimientos
+  controller: App\Controller\Admin\IcProcedimientosController::show
+  requirements:
+    id: '\d+'
+
+procesos_procedimientos_eliminar:
+  path: /club-tijuana-eliminar-procedimientos
+  controller: App\Controller\Admin\IcProcedimientosController::delete }
+  requirements:
+    id: '\d+'
+
+#
+#  instruccion de trabajo
+#
+
+procesos_instruccion_agregar:
+  path: /{idProcedimiento}/club-tijuana-agregar-instruccion
+  controller: App\Controller\Admin\IcInstruccionTrabajoController::new
+  requirements:
+    idProcedimiento: '\d+'
+
+procesos_instruccion_editar:
+  path: /{idInstructivo}/club-tijuana-editar-instruccion-de-trabajo
+  controller: App\Controller\Admin\IcInstruccionTrabajoController::edit
+  requirements:
+    idInstructivo: '\d+'
+
+procesos_instruccion_mostrar:
+  path: /{id}/club-tijuana-mostrar-instruccion-de-trabajo
+  controller: App\Controller\Admin\IcInstruccionTrabajoController::show
+  requirements:
+    id: '\d+'
+
+procesos_instruccion_eliminar:
+  path: /{idInstruccion}/club-tijuana-editar-instruccion-de-trabajo
+  controller: App\Controller\Admin\IcInstruccionTrabajoController::delete
+  requirements:
+    idInstruccion: '\d+'
+#
+# instructivo descripcion
+#
+
+procesos_instructivo_agregar:
+  path: /{id}/club-tijuana-agregar-instructivo-descripcion
+  controller: App\Controller\Admin\IcInstructivoController::new
+  requirements:
+    id: '\d+'
+
+procesos_instructivo_editar:
+  path: /{id}/club-tijuana-editar-instructivo-descripcion
+  controller: App\Controller\Admin\IcInstructivoController::edit
+  requirements:
+    id: '\d+'
+
+procesos_instructivo_mostrar:
+  path: /{id}/club-tijuana-mostrar-instructivo-descripcion
+  controller: App\Controller\Admin\IcInstructivoController::show
+  requirements:
+    id: '\d+'
+
+procesos_instructivo_eliminar:
+  path: /{iDescripcion}/club-tijuana-borrar-instructivo-descripcion
+  controller: App\Controller\Admin\IcInstructivoController::delete
+  requirements:
+    iDescripcion: '\d+'
+
+#
+# Perfil de usuario Admin
+#
+
+procesos_perfil:
+  path: /perfil-de-usuario
+  controller: App\Controller\Admin\IcFosPerfilController::index
+
+procesos_perfil_agregar:
+  path: /{idPerfil}/nuevo-perfil-de-usuario
+  controller: App\Controller\Admin\IcFosPerfilController::new
+
+procesos_perfil_modificar:
+  path: /modificar-perfil-de-usuario/{idPerfil}
+  controller: App\Controller\Admin\IcFosPerfilController::edit
+  requirements:
+    idPerfil: '\d+'
+
+procesos_perfil_borrar:
+  path: /borrar-perfil-de-usuario/{idPerfil}
+  controller: App\Controller\Admin\IcFosPerfilController::delete
+  requirements:
+    idPerfil: \d+
+
+procesos_usuarios:
+  path: /usuarios
+  controller: App\Controller\FixController::IcUsuario:index }
+
+#
+#Centro de Trabajo
+#
+procesos_centro:
+  path: /centro-de-trabajo
+  controller: App\Controller\Admin\IcCentroTrabajoController::index
+
+procesos_centro_agregar:
+  path: /agregar-centro-de-trabajo
+  controller: App\Controller\Admin\IcCentroTrabajoController::new
+
+procesos_centro_mostrar:
+  path: /{idCentro}/mostrar-centro-de-trabajo
+  controller: App\Controller\Admin\IcCentroTrabajoController::show
+  requirements:
+    idCentro: '\d+'
+
+procesos_centro_editar:
+  path: /{idCentro}/editar-centro-de-trabajo
+  controller: App\Controller\Admin\IcCentroTrabajoController::edit
+  requirements:
+    idCentro: '\d+'
+
+
+#
+# Direccion
+#
+
+procesos_direccion:
+  path: /direccion
+  controller: App\Controller\Admin\IcDireccionController::index
+
+procesos_direccion_agregar:
+  path: /agregar-direccion
+  controller: App\Controller\Admin\IcDireccionController::new
+
+procesos_direccion_editar:
+  path: /{idDireccion}/editar-direccion
+  controller: App\Controller\Admin\IcDireccionController::edit
+  requirements:
+    idDireccion: '\d+'
+
+procesos_direccion_eliminar:
+  path: /{idDireccion}/mostrar-direccion
+  controller: App\Controller\Admin\IcDireccionController::delete
+  requirements:
+    idDireccion: '\d+'
+
+#
+# Gerencia
+#
+
+procesos_gerencia:
+  path: /gerencia
+  controller: App\Controller\Admin\IcGerenciaController::index
+
+procesos_gerencia_modificar:
+  path: /{idGerencia}/editar-gerencia
+  controller: App\Controller\Admin\IcGerenciaController::edit
+  requirements:
+    idGerencia: '\d+'
+
+procesos_gerencia_agregar:
+  path: /agregar-nueva-gerencia
+  controller: App\Controller\Admin\IcGerenciaController::new
+
+procesos_gerencia_eliminar:
+  path: /{idGerencia}/mostrar-gerencia
+  controller: App\Controller\Admin\IcGerenciaController::delete
+  requirements:
+    idGerencia: '\d+'
+
+#
+# Puesto
+#
+
+procesos_puesto:
+  path: /puesto
+  controller: App\Controller\Admin\IcPuestoController::index}
+
+procesos_puesto_mostrar:
+  path: /{idPuesto}/mostrar-puesto
+  controller: App\Controller\Admin\IcPuestoController::show}
+
+procesos_puesto_editar:
+  path: /{idPuesto}/editar-puesto
+  controller: App\Controller\Admin\IcPuestoController::edit}
+
+procesos_puesto_agregar:
+  path: /agregar-puesto
+  controller: App\Controller\Admin\IcPuestoController::new}
+
+
+
+#
+# Categoria
+#
+
+procesos_categoria:
+  path: /categoria
+  controller: App\Controller\Admin\IcCategoriaController::index
+
+procesos_categoria_mostrar:
+  path: /{idCategoria}/mostrar-categoria
+  controller: App\Controller\Admin\IcCategoriaController::show
+  requirements:
+    idCategoria: '\d+'
+
+procesos_categoria_editar:
+  path: /{idCategoria}/editar-categoria
+  controller: App\Controller\Admin\IcCategoriaController::edit
+  requirements:
+    idCategoria: '\d+'
+
+procesos_categoria_agregar:
+  path: /agregar-categoria
+  controller: App\Controller\Admin\IcCategoriaController::new
+
+procesos_categoria_eliminar:
+  path: /{idCategoria}/eliminar-categoria
+  controller: App\Controller\Admin\IcCategoriaController::delete
+  requirements:
+    idCategoria: '\d+'
+
+#
+#Categoria Usuario
+#
+#procesos_categoria_usuario:
+#  path: /categorias-del-usuario
+#  controller: App\Controller\FixController::IcCategoriaUsuario:index}
+#
+#procesos_subcategoria:
+#  path: /subcentro-costo
+#  controller: App\Controller\FixController::IcSubcategoria:index}
+#
+#procesos_subcategoria_usuario:
+#  path: /subcategorias-del-usuario
+#  controller: App\Controller\FixController::IcSubcategoriaUsuario:index}
+
+
+#
+# Rutas de Area
+#
+procesos_area:
+  path: /area
+  controller: App\Controller\Admin\IcAreaController::index
+
+procesos_area_modificar:
+  path: /{idArea}/procedimiento-modificar-area
+  controller: App\Controller\Admin\IcAreaController::edit
+
+procesos_area_mostrar:
+  path: /{idArea}/procedimiento-mostrar-area
+  controller: App\Controller\Admin\IcAreaController::show
+
+procesos_area_agregar:
+  path: /procedimiento-agregar-area
+  controller: App\Controller\Admin\IcAreaController::new
+
+procesos_area_eliminar:
+  path: /procedimiento-eliminar-area
+  controller: App\Controller\Admin\IcAreaController::delete

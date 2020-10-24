@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerencia {% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-1">
+
+    <h1>Editar Gerencia</h1>
+
+    {{ include('admin/ic_gerencia/_form.html.twig', {'button_label': 'Actualizar'}) }}
+    {{ include('admin/ic_gerencia/_delete_form.html.twig') }}
+    </div>
+</div>
+
+{% endblock %}

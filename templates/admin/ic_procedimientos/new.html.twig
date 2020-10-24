@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-8 col-md-offset-1">
+        <div class="card">
+            <div class="card-header">
+                <h1>Nuevo Procedimiento</h1>
+            </div>
+            <div class="card-body">
+                {{ include('admin/ic_procedimientos/_form.html.twig') }}
+            </div>
+            <div class="card-footer">
+                {#        <a href="{{ path('procesos_procedimientos') }}">back to list</a>#}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

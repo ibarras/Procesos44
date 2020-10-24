@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\IcArea;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
+
+class IcAreaType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+
+            ->add('idGerencia', EntityType::class,
+                array('class' => 'App\Entity\IcGerencia',
+                    'label' => 'Gerencia',
+                    'attr' => array('class' => 'form-control')
+                ))
+            ->add('nombre', TextType::class, array(
+                'label' => 'Nombre' , 'attr' => array('class'=>'form-control')
+            ))
+
+            ->add('correo', EmailType::class, array(
+                'label' => 'Correo Electrónico', 'attr' => array('class' => 'form-control')
+            ))
+
+            ->add('telefono', TextType::class, array(
+                'label' => 'Teléfono' , 'attr' => array('class' => 'form-control')
+            ));
+
+
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => IcArea::class,
+        ]);
+    }
+}

@@ -1,0 +1,20 @@
+#
+# Api
+#
+
+api_solicitud_tipo:
+  path: /tipo-de-solicitud
+  defaults: { _controller: AppBundle:IcApi:getTipoSolicitud }
+
+api_solicitud_listas:
+  path: /lista-de-torneo-categoria-jornada-direccion-co-cc
+  defaults: { _controller: AppBundle:IcApi:getListas }
+
+api_solicitud_cuenta_contable:
+  path: /cuenta-contable-de-gastos
+  defaults: { _controller: AppBundle:IcApi:getCuentasContables }
+
+api_torneo_categoria_jornadas:
+  path: /lista-de-torneo-categoria-jornada
+  defaults: { _controller: AppBundle:IcApi:getTorneo }
+

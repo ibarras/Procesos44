@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IcCuentaContable{% endblock %}
+
+{% block content %}
+    <h1>IcCuentaContable</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ic_cuenta_contable.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ ic_cuenta_contable.nombre }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ic_cuenta_contable_index') }}">back to list</a>
+
+    <a href="{{ path('ic_cuenta_contable_edit', {'id': ic_cuenta_contable.id}) }}">edit</a>
+
+    {{ include('ic_cuenta_contable/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %} Categorias Club Tijuana{% endblock %}
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+        <h1>Categorias</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for categoria in ic_categorias %}
+                <tr>
+                    <td>{{ categoria.idCategoria }}</td>
+                    <td>{{ categoria.nombre }}</td>
+                    <td>
+                        <a class="btn btn-warning btn-md btn-mdb-color" href="{{ path('procesos_categoria_editar', {'idCategoria': categoria.idCategoria}) }}">
+                            <span class="fa fa-edit"></span>Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            <a  class="btn btn-primary btn-md" href="{{ path('procesos_categoria_agregar') }}"> Agregar</a>
+    </div>
+</div>
+
+{% endblock %}

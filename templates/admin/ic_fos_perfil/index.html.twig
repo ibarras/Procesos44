@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Direccion {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+            <h1>Perfil de Usuarios Sistema de Procesos</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Perfil</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>FechaIngreso</th>
+                    <th>Rfc</th>
+                    <th>Nss</th>
+                    <th>Profesion</th>
+                    <th>TipoPago</th>
+                    <th>Estatus</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ic_fos_perfil in ic_fos_perfils %}
+                    <tr>
+                        <td>{{ ic_fos_perfil.idPerfil }}</td>
+                        <td>{{ ic_fos_perfil.nombre }} {{ ic_fos_perfil.apellido }}</td>
+                        <td>{{ ic_fos_perfil.telefono }}</td>
+                        <td>{{ ic_fos_perfil.fechaIngreso ? ic_fos_perfil.fechaIngreso|date('Y-m-d') : '' }}</td>
+                        <td>{{ ic_fos_perfil.rfc }}</td>
+                        <td>{{ ic_fos_perfil.nss }}</td>
+                        <td>{{ ic_fos_perfil.profesion }}</td>
+                        <td>{{ ic_fos_perfil.tipoPago }}</td>
+                        <td>{{ ic_fos_perfil.estatus ? 'Activo' : 'Baja' }}</td>
+                        <td>
+                            <a class="btn btn-md btn-mdb-color"
+                               href="{{ path('procesos_perfil_modificar', {'idPerfil': ic_fos_perfil.idPerfil}) }}">Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="25">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

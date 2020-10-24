@@ -1,0 +1,235 @@
+#
+# Rutas solicitud de Egresos
+#
+
+solicitud_egresos_usuario_index:
+    path: /mis-solicitudes-de-egresos
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:index }
+
+solicitud_egreso_usuario_show:
+    path: /{id}/solicitud-de-egreso
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:show }
+
+solicitud_egreso_usuario_template:
+    path: /{id}/solicitud/template-de-egreso-template
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:template }
+
+solicitud_egresos:
+    path: /mostrar-solicitudes-de-egresos
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickEgresosLista }
+
+solicitud_egresos_agregar:
+    path: /nueva-solicitud-de-egresos
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickAEgresoAgregar }
+
+solicitud_egresos_mostrar:
+    path: /mostrar-solicitud-egresos/{id}
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickEgresoMostrar }
+    requirements:
+        id: '\d+'
+
+solicitud_egresos_descripcion_agregar:
+    path: /nuevo-registro-egreso-descripcion
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickAgregarDescripcion }
+
+solicitud_deposito_agregar:
+    path: /nuevo-depositio-a-solicitud
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickAgregarDeposito }
+
+api_solicitud_descripcion_eliminar:
+    path: /eliminar-descripcion-solicitud/{id}
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickDeleteDescripcion }
+    requirements:
+        id: '\d+'
+
+api_solicitud_descripcion_deposito_eliminar:
+    path: /eliminar-deposito-de-la-descripcion-solicitud/{id}
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickDeleteDeposito }
+    requirements:
+        id: '\d+'
+
+solicitud_descripcion_deposito_eliminar:
+    path: /eliminar-la-solicitud/{id}
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickDeleteSolicitud }
+    requirements:
+        id: '\d+'
+
+
+#procesos_solicitud_ausencia:
+#    path: /solicitudes-de-ausencia
+#    defaults: { _controller: AppBundle:IcSolicitudAusencia:index }
+#
+#proceso_solicitud_ausencia_agregar:
+#    path: /nueva-solicitud-de-ausencia
+#    defaults: { _controller:  AppBundle:IcSolicitudAusencia:new }
+#
+#proceso_solicitud_ausencia_mostrar:
+#    path: /mostrar-solicitud-de-ausencia/{id}
+#    defaults: { _controller:  AppBundle:IcSolicitudAusencia:show }
+#    requirements:
+#        id: '\d+'
+#
+#proceso_solicitud_ausencia_modificar:
+#    path: /modificar-solicitud-de-ausencia/{id}
+#    defaults: { _controller:  AppBundle:IcSolicitudAusencia:edit }
+#    requirements:
+#        id: '\d+'
+
+#
+# Solicitud de Anticipo
+#
+#procesos_solicitud_anticipo:
+#    path: /solicitudes-de-anticipo-reembolso
+#    defaults: { _controller: AppBundle:IcSolicitudAnticipoReembolso:index }
+#
+#procesos_solicitud_anticipo_agregar:
+#    path: /nueva-solicitudes-de-anticipo-reembolso
+#    defaults: { _controller: AppBundle:IcSolicitudAnticipoReembolso:new }
+#
+#procesos_solicitud_anticipo_modificar:
+#    path: /modificar-solicitudes-de-anticipo-reembolso/{id}
+#    defaults: { _controller: AppBundle:IcSolicitudAnticipoReembolso:edit }
+#    requirements:
+#        id: '\d+'
+#
+#procesos_solicitud_anticipo_mostrar:
+#    path: /mostrar-solicitudes-de-anticipo-reembolso/{id}
+#    defaults: { _controller: AppBundle:IcSolicitudAnticipoReembolso:show }
+#    requirements:
+#        id: '\d+'
+#
+#procesos_solicitud_anticipo_descripcion_agregar:
+#    path: /nueva-solicitudes-de-anticipo-reembolso-descripcion
+#    defaults: { _controller: AppBundle:IcSolicitudAnticipoReembolso:descripcion}
+
+
+
+#
+# Solicitud de Gasto
+#
+
+#procesos_solicitud_gasto:
+#    path: /informe-de-gasto
+#    defaults: { _controller: AppBundle:IcSolicitudGasto:index }
+#
+#
+#procesos_solicitud_gasto_mostrar:
+#    path: /mostrar-solicitud-de-gasto/{id}
+#    defaults: { _controller:  AppBundle:IcSolicitudGasto:show }
+#    requirements:
+#        id: '\d+'
+#
+#procesos_solicitud_gasto_autoriza:
+#    path: /autoriza-solicitud-de-gasto/{id}/solicitud
+#    defaults: { _controller:  AppBundle:IcSolicitudGasto:autoriza }
+#    requirements:
+#        id: '\d+'
+
+#
+# Solicitud de Reembolso
+#
+
+#api_solicitudes_reembolso:
+#    path: /solicitudes-de-anticipo-reembolso
+#    defaults: { _controller: AppBundle:IcApi:solicitudes }
+#
+#api_solicitud_reembolso:
+#    path: /solicitud-anticipo-reembolso/{id}
+#    defaults: { _controller: AppBundle:IcApi:onClickShowsolicitud }
+#    requirements:
+#        id: '\d+'
+#
+
+
+#procesos_solicitud_reembolso:
+#    path: /solicitudes-de-reembolso
+#    defaults: { _controller: AppBundle:IcSolicitudReembolso:index }
+#
+#
+##procesos_solicitud_reembolso_agregar:
+##    path: /nueva-solicitud-de-reembolso
+##    defaults: { _controller: AppBundle:IcSolicitudReembolso:new }
+##
+##
+#procesos_solicitud_reembolso_mostrar:
+#    path: /mostrar-solicitud-de-reembolso/{id}
+#    defaults: { _controller:  AppBundle:IcSolicitudReembolso:show }
+#    requirements:
+#        id: '\d+'
+##
+#procesos_solicitud_reembolso_modificar:
+#    path: /modificar-solicitud-de-reembolso/{id}
+#    defaults: { _controller:  AppBundle:IcSolicitudReembolso:edit }
+#    requirements:
+#        id: '\d+'
+#
+#procesos_reembolso_documento:
+#    path: /solicitud-reembolso/agregar-documento
+#    defaults: { _controller: AppBundle:IcSolicitudReembolso:documento }
+
+#
+# Solicitud de Producto
+#
+
+
+#
+# Producto
+#
+
+#api_solicitud_producto_informacion:
+#    path: /agregar-informacion-producto
+#    defaults: { _controller: AppBundle:IcApiProducto:onClickAgregarDescripcion }
+#
+#api_solicitud_producto_mostrar:
+#    path: /mostrar-solicitud-producto/{id}
+#    defaults: { _controller: AppBundle:IcApiProducto:onClickSolicitud }
+#    requirements:
+#        id: '\d+'
+#
+#procesos_solicitud_producto:
+#    path: /solicitudes-de-producto
+#    defaults: { _controller: AppBundle:IcSolicitudProducto:index }
+#
+##procesos_solicitud_producto_agregar:
+##    path: /nueva-solicitud-de-producto
+##    defaults: { _controller: AppBundle:IcSolicitudProducto:new }
+#
+#procesos_solicitud_producto_mostrar:
+#    path: /mostrar-solicitud-de-producto/{id}
+#    defaults: { _controller: AppBundle:IcSolicitudProducto:show }
+#    requirements:
+#        id: '\d+'
+
+#procesos_solicitud_producto_editar:
+#    path: /modificar-solicitud-de-producto/{id}
+#    defaults: { _controller: AppBundle:IcSolicitudProducto:index }
+#    requirements:
+#        id: '\d+'
+
+
+#
+# Solicitud de Vacaciones
+#
+
+#procesos_solicitud_vacaciones:
+#    path: /solicitudes-de-vacaciones
+#    defaults: { _controller: AppBundle:IcSolicitudVacaciones:index }
+#
+#procesos_solicitud_vacaciones_agregar:
+#    path: /nueva-solicitud-de-vacaciones
+#    defaults: { _controller: AppBundle:IcSolicitudVacaciones:new }
+#
+#procesos_solicitud_vacaciones_mostrar:
+#    path: /mostrar-solicitudes-de-vacaciones/{id}
+#    defaults: { _controller: AppBundle:IcSolicitudVacaciones:show }
+#    requirements:
+#        id: '\d+'
+#
+#procesos_solicitud_vacaciones_modificar:
+#    path: /modificar-solicitud-de-vacaciones/{id}
+#    defaults: { _controller: AppBundle:IcSolicitudVacaciones:edit }
+#    requirements:
+#        id: '\d+'
+#
+# Ruta menu procedimientos
+#

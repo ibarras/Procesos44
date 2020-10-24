@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('procesos_proceso_eliminar', {'id': ic_procesos.id}) }}"
+      onsubmit="return confirm('Desea borrar este elemento?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ic_procesos.id) }}">
+    <button class="btn btn-md btn-danger">Eliminar</button>
+</form>

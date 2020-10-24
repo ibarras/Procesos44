@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit IcPuesto{% endblock %}
+
+{% block body %}
+    <h1>Edit IcPuesto</h1>
+
+    {{ include('ic_puesto/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ic_puesto_index') }}">back to list</a>
+
+    {{ include('ic_puesto/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IcPuesto index{% endblock %}
+
+{% block body %}
+    <h1>IcPuesto index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdPuesto</th>
+                <th>Nombre</th>
+                <th>Slug</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ic_puesto in ic_puestos %}
+            <tr>
+                <td>{{ ic_puesto.idPuesto }}</td>
+                <td>{{ ic_puesto.nombre }}</td>
+                <td>{{ ic_puesto.slug }}</td>
+                <td>
+                    <a href="{{ path('ic_puesto_show', {'idPuesto': ic_puesto.idPuesto}) }}">show</a>
+                    <a href="{{ path('ic_puesto_edit', {'idPuesto': ic_puesto.idPuesto}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ic_puesto_new') }}">Create new</a>
+{% endblock %}

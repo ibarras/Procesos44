@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Agregar Direccion{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-1">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Direccion</h1>
+                </div>
+                <div class="card-body">
+                    {{ include('ic_direccion/_form.html.twig') }}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('procesos_direccion') }}">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

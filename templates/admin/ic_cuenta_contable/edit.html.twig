@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cuenta Contable{% endblock %}
+
+{% block content %}
+    <h1>Cuenta Contable</h1>
+
+    {{ include('admin/ic_cuenta_contable/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('ic_cuenta_contable_index') }}">Regresar</a>
+
+    {{ include('admin/ic_cuenta_contable/_delete_form.html.twig') }}
+{% endblock %}

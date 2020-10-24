@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %} Centro Trabajo Club Tijuana{% endblock %}
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+        <h1>Centro Trabajo</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Centro Trabajo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for centro_trabajo in ic_centro_trabajos %}
+                <tr>
+                    <td>{{ centro_trabajo.idCentro }}</td>
+                    <td>{{ centro_trabajo.nombre }}</td>
+                    <td>
+                        <a class="btn btn-warning btn-md btn-mdb-color" href="{{ path('procesos_centro_editar', {'idCentro': centro_trabajo.idCentro}) }}">
+                            <span class="fa fa-edit"></span>Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+            <a  class="btn btn-primary btn-md" href="{{ path('procesos_centro_agregar') }}"> Agregar</a>
+    </div>
+</div>
+
+{% endblock %}

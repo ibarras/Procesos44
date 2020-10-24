@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IcCuentaContable index{% endblock %}
+
+{% block content %}
+    <h1>Cuenta Contable</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ic_cuenta_contable in ic_cuenta_contables %}
+            <tr>
+                <td>{{ ic_cuenta_contable.id }}</td>
+                <td>{{ ic_cuenta_contable.nombre }}</td>
+                <td>
+                    <a href="{{ path('ic_cuenta_contable_show', {'id': ic_cuenta_contable.id}) }}">show</a>
+                    <a href="{{ path('ic_cuenta_contable_edit', {'id': ic_cuenta_contable.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ic_cuenta_contable_new') }}">Create new</a>
+{% endblock %}

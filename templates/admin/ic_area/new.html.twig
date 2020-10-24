@@ -1,0 +1,20 @@
+{% extends '../base.html.twig' %}
+
+{% block title %}Agregar Area{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-1">
+
+
+    <h1>Agregar Area</h1>
+
+    {{ include('ic_area/_form.html.twig') }}
+
+    <a href="{{ path('procesos_area') }}">back to list</a>
+    </div>
+</div>
+
+{% endblock %}

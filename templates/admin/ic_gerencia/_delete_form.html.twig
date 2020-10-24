@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('procesos_gerencia_eliminar', {'idGerencia': ic_gerencium.idGerencia}) }}"
+      onsubmit="return confirm('Desea borrar este elemento?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ic_gerencium.idGerencia) }}">
+    <button class="btn btn-md btn-danger">Eliminar</button>
+</form>

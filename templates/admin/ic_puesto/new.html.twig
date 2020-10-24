@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New IcPuesto{% endblock %}
+
+{% block body %}
+    <h1>Create new IcPuesto</h1>
+
+    {{ include('ic_puesto/_form.html.twig') }}
+
+    <a href="{{ path('ic_puesto_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Direccion {% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-6 col-md-offset-1">
+        <h1>Direccion</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Direccion</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ic_direccion in ic_direccions %}
+                <tr>
+                    <td>{{ ic_direccion.idDireccion }}</td>
+                    <td>{{ ic_direccion.nombre }}</td>
+                    <td>
+                        <a class="btn btn-mdb-color btn-md" href="{{ path('procesos_direccion_editar', {'idDireccion': ic_direccion.idDireccion}) }}">Editar</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a  class="btn btn-md btn-primary" href="{{ path('procesos_direccion_agregar') }}">Agregar</a>
+    </div>
+</div>
+{% endblock %}

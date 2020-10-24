@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IcProcedimientos index{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Procedimientos</h3>
+                </div>
+                <div class="card-body">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for ic_procedimiento in ic_procedimientos %}
+                            <tr>
+                                <td>{{ ic_procedimiento.title }}</td>
+                                <td>
+
+                                    <a type="button"  class="btn btn-md btn-mdb-color" href="{{ path('procesos_procedimientos_mostrar', {'id': ic_procedimiento.id}) }}">
+                                        <span class="fa fa-eye">&nbsp;</span>Mostrar</a>
+                                    <a type="button"  class="btn btn-md btn-warning" href="{{ path('procesos_procedimientos_editar', {'id': ic_procedimiento.id}) }}">Modificar</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">No existe información </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-footer">
+                       <a class="btn btn-primary btn-md" href="{{ path('procesos_procedimientos_agregar', { 'idProcesos': idProcesos }) }}">Agregar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

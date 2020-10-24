@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %} Centro Trabajo Club Tijuana{% endblock %}
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+
+        <div class="card">
+            <div class="card-header">
+                <h1>Centro Trabajo</h1>
+            </div>
+            <div class="card-body">
+                {{ include('admin/ic_centro_trabajo/_form.html.twig', {'button_label': 'Actualizar'}) }}
+                {{ include('admin/ic_centro_trabajo/_delete_form.html.twig') }}
+
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('procesos_centro') }}">Regresar</a>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+{% endblock %}

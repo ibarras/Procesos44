@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-1">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Nuevo Proceso</h1>
+                </div>
+                <div class="card-body">
+                    {{ include('admin/ic_procesos/_form.html.twig') }}
+                </div>
+                <div class="card-footer">
+                    <a href="{{ path('procesos_procesos', {'idMacroproceso': idMacroproceso}) }}">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

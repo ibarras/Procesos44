@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-10">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Editar Proceso</h3>
+                </div>
+
+                <div class="card-body">
+
+                    {{ include('admin/ic_procesos/_form.html.twig', {'button_label': 'Actualizar'}) }}
+                    {{ include('admin/ic_procesos/_delete_form.html.twig') }}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

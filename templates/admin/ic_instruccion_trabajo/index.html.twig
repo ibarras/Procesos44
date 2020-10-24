@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}IcInstruccionTrabajo index{% endblock %}
+
+{% block body %}
+    <h1>IcInstruccionTrabajo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Descripcion</th>
+                <th>Imagen</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ic_instruccion_trabajo in ic_instruccion_trabajos %}
+            <tr>
+                <td>{{ ic_instruccion_trabajo.id }}</td>
+                <td>{{ ic_instruccion_trabajo.title }}</td>
+                <td>{{ ic_instruccion_trabajo.descripcion }}</td>
+                <td>{{ ic_instruccion_trabajo.imagen }}</td>
+                <td>
+                    <a href="{{ path('ic_instruccion_trabajo_show', {'id': ic_instruccion_trabajo.id}) }}">show</a>
+                    <a href="{{ path('ic_instruccion_trabajo_edit', {'id': ic_instruccion_trabajo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('ic_instruccion_trabajo_new') }}">Create new</a>
+{% endblock %}

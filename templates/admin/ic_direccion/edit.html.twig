@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit IcDireccion{% endblock %}
+
+{% block body %}
+    <h1>Edit IcDireccion</h1>
+
+    {{ include('admin/ic_direccion/_form.html.twig', {'button_label': 'Actualizar'}) }}
+
+    <a href="{{ path('procesos_direccion') }}">back to list</a>
+
+    {{ include('admin/ic_direccion/_delete_form.html.twig') }}
+{% endblock %}

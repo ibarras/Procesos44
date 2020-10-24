@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerencia {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+            <h1>Gerencia</h1>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Gerencia</th>
+                    <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ic_gerencium in ic_gerencias %}
+                    <tr>
+                        <td>{{ ic_gerencium.nombre }}</td>
+                        <td>
+                            <a class="btn btn-mdb-color btn-md"
+                               href="{{ path('procesos_gerencia_modificar', {'idGerencia': ic_gerencium.idGerencia}) }}">Editar</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a class="btn btn-primary btn-md" href="{{ path('procesos_gerencia_agregar') }}">Agregar</a>
+        </div>
+    </div>
+
+{% endblock %}

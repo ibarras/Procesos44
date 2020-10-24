@@ -1,0 +1,19 @@
+#
+# Rutas solicitud de Egresos
+#
+
+reportes_gestion_marca:
+    path: /reportes-gestion-de-marca
+    defaults: { _controller: AppBundle:IcReportesGestionMarca:direccion }
+
+reportes_general:
+    path: /resumen-general-gestion-marca
+    defaults: { _controller: AppBundle:IcReportesGestionMarca:general }
+
+reportes_gestion_recursos:
+    path: /reportes-gestion-recursos
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:index }
+
+reportes_gestion_deportiva:
+    path: /reportes-gestion-deportiva
+    defaults: { _controller: AppBundle:IcSolicitudEgreso:index }

@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('procesos_categoria_eliminar', {'idCategoria': ic_categorium.idCategoria}) }}"
+      onsubmit="return confirm('Desea eliminar el elemento?');">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ic_categorium.idCategoria) }}">
+    <button class="btn btn-danger btn-md">Eliminar</button>
+</form>

@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}IcDocumentosPerfil{% endblock %}
+
+{% block body %}
+    <h1>IcDocumentosPerfil</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ ic_documentos_perfil.id }}</td>
+            </tr>
+            <tr>
+                <th>Cv</th>
+                <td>{{ ic_documentos_perfil.cv }}</td>
+            </tr>
+            <tr>
+                <th>ActaNacimiento</th>
+                <td>{{ ic_documentos_perfil.actaNacimiento }}</td>
+            </tr>
+            <tr>
+                <th>ComprobanteDomicilio</th>
+                <td>{{ ic_documentos_perfil.comprobanteDomicilio }}</td>
+            </tr>
+            <tr>
+                <th>ComprobanteEstudios</th>
+                <td>{{ ic_documentos_perfil.comprobanteEstudios }}</td>
+            </tr>
+            <tr>
+                <th>CredencialElector</th>
+                <td>{{ ic_documentos_perfil.credencialElector }}</td>
+            </tr>
+            <tr>
+                <th>CartasRecomendacion</th>
+                <td>{{ ic_documentos_perfil.cartasRecomendacion }}</td>
+            </tr>
+            <tr>
+                <th>Fotografia</th>
+                <td>{{ ic_documentos_perfil.fotografia }}</td>
+            </tr>
+            <tr>
+                <th>CartaNoAntecedentesPenales</th>
+                <td>{{ ic_documentos_perfil.cartaNoAntecedentesPenales }}</td>
+            </tr>
+            <tr>
+                <th>PruebaLaboratorio</th>
+                <td>{{ ic_documentos_perfil.pruebaLaboratorio }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('ic_documentos_perfil_index') }}">back to list</a>
+
+    <a href="{{ path('ic_documentos_perfil_edit', {'id': ic_documentos_perfil.id}) }}">edit</a>
+
+    {{ include('ic_documentos_perfil/_delete_form.html.twig') }}
+{% endblock %}

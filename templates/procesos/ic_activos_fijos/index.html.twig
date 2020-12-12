@@ -1,0 +1,156 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+
+<div class="row" id="activos-fijos">
+
+    <div class="col-sm-12" >
+        <div class="card">
+            <div class="card-header">
+
+                <form class="form-inline" v-on:submit.prevent="postActivos">
+
+                    <div class="form-group mb-2 md-form">
+
+                        <select class="custom-select d-block w-70" v-model="area"
+                                v-on:change="onChangeArea" required>
+                            <option disabled value="">Seleccionar un Area</option>
+
+                            <option v-for="a in AreaList" :value="a.id">@{ a.nombre }</option>
+                        </select>
+                        <label for="firstName" class="mt-n5">Seleccionar Usuarios </label>
+                    </div>
+
+                    <button v-on:submit.prevent="postActivos" class="btn btn-success btn-sm mb-2">Buscar</button>
+
+                </form>
+
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Serie</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Ubicacion</th>
+                        <th>Codigo Barras</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr v-for="a in ActivosList ">
+                            <td>@{ a.serie }</td>
+                            <td>@{ a.modelo }</td>
+                            <td>@{ a.marca }</td>
+                            <td>@{ a.ubicacion }</td>
+                            <td>@{ a.codigo_barras }</td>
+                            <td>
+                                <button   :disabled="a.estatus == true" type="button" class="btn btn-mdb-color btn-sm" v-on:click="onDeleteActivo(a.id)">Solicitar Salida</button>
+
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer">
+                <a href="{{ path('ic_activos_fijos_new') }}">Agregar</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        new Vue({
+            delimiters: ['@{', '}'],
+            el: '#activos-fijos',
+
+            created: function () {
+                this.getActivos();
+                this.onChangeArea();
+            },
+
+            data: {
+
+                AreaList: [],
+                ActivosList: [],
+                isHidden: false,
+                area: null,
+                estatus: null,
+
+            },
+            mounted() {
+            },
+            watched: {},
+            computed: {},
+
+            methods: {
+
+                postActivos: function () {
+                    const params = {
+                        Area: this.area,
+                    };
+                    let url = '/activos';
+
+                    axios.post(url, params).then(response => {
+                        this.ActivosList = response.data;
+                    }).catch(error => {
+                        this.errors = 'Corrija para poder crear con éxito'
+                        console.log(error);
+                    });
+                },
+
+                getActivos: function () {
+                    let url = '/activos';
+
+                    axios.get(url).then((response) => {
+                        this.ActivosList = response.data;
+                        console.log(response.data);
+                    }).catch(error => {
+                        console.log(error);
+                    })
+                },
+
+                onChangeArea: function () {
+                    let url = '/json-area';
+
+                    axios.get(url).then((response) => {
+                        this.AreaList = response.data;
+                    }).catch(error => {
+                        console.log(error);
+                    })
+                },
+
+
+                onDeleteActivo: function (solicitud) {
+
+                    if (confirm("Solicitar salida de activo fijo?" )) {
+
+                        let url = '/salida-activo-fijo/' + solicitud;
+                        axios.delete(url).then(response => {
+                            console.log(response.data);
+                            this.getActivos();
+
+                        }).catch(error => {
+                            this.errors = 'Erro al obtener la inforamacion de las solicitudes';
+                            console.log(error);
+                        });
+                    }
+                },
+
+            }, //fin de methods
+
+        });
+    </script>
+
+{% endblock %}

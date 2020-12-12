@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ic_centro_organizativo_direccion")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcCentroOrganizativoRepository")
+ *
  */
 class IcCentroOrganizativoDireccion
 {
@@ -63,6 +65,11 @@ class IcCentroOrganizativoDireccion
         $this->idDireccion = $idDireccion;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 
 

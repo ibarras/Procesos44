@@ -1,0 +1,201 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+    <style>
+        label {
+            font-size: 10px;
+        }
+    </style>
+
+    <div class="row" id="crud-solicitud-egreso">
+
+        <div class="col-sm-12">
+            <!-- Extended material form grid -->
+            <form v-on:submit.prevent="postSolicitudEgreso">
+                <!-- Grid row -->
+                <div class="form-row">
+                    <!-- Grid column -->
+                    <div class="col-md-6">
+                        <!-- Material input -->
+                        <div class="md-form form-group">
+                            <input type="text" class="form-control" id="inputCityMD" disabled
+                                   placeholder="{{ app.user.username }}">
+                            <label for="inputCityMD">Solicitado Por:</label>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-6">
+                        <!-- Material input -->
+                        <div class="md-form form-group">
+                            <input type="text" class="form-control" id="inputZipMD" disabled
+                                   placeholder="{{ profile.idArea.nombre }}">
+                            <label for="inputZipMD">Area Solicitante:</label>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+
+
+                <!-- Grid row  -->
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+
+                            <select class="custom-select d-block w-100" v-model="FormaDePago"
+                                    v-on:change="onChangeFormaDePago(FormaDePago)" required>
+                                <option disabled value="">Selecciona uno ...</option>
+                                <option value="Deposito a Tarjeta">Deposito a Tarjeta</option>
+                                <option value="Cheque">Cheque</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
+                            <label for="lastName" class="mt-n5">Forma de Pago</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+
+                            <input type="text" class="form-control" v-model="Importe" placeholder="$XXX,XXX" required>
+                            <label for="lastName">Importe</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid row  -->
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <!-- star input -->
+                            <select class="custom-select d-block w-100" v-model="Direccion"
+                                    v-on:change="onChangeCentroOrganizativo(Direccion)" required>
+                                <option disabled value="">Seleccione una Dirección</option>
+                                <option v-for="direccion in DireccionList" :value="direccion.id">{! direccion.nombre
+                                    !}
+                                </option>
+                            </select>
+                            <label for="lastName" class="mt-n5">Direccion</label>
+
+                            <!-- end input -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <!-- star input -->
+                            <select class="custom-select d-block w-100" v-model="CentroOrganizativo"
+                                    v-on:change="onChangeCentroCosto(CentroOrganizativo)" required>
+                                <option disabled value="">Seleccione un Centro Organizativo</option>
+
+                                <option v-for="organizativo in CoList" :value="organizativo.id">{! organizativo.nombre
+                                    !}
+                                </option>
+                            </select>
+                            <label for="firstName" class="mt-n5">Centro Organizativo</label>
+
+                            <!-- end input -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid row  -->
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <select class="custom-select d-block w-100" v-model="CentroDeCosto" required>
+                                <option v-for="costo in CcList" :value="costo.id">{! costo.nombre !}</option>
+                            </select>
+                            <label for="firstName" class="mt-n5">Centro de Costo</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <input type="text" class="form-control" placeholder="Motivo de la Compra"
+                                   v-model="MotivoDeLaCompra" required>
+                            <label for="lastName">Motivo de la Compra</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid row  -->
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <select class="custom-select d-block w-100" v-model="Torneo" required>
+                                <option disabled value="">Selecciona uno ...</option>
+                                <option v-for="torneo in TorneoList" :value="torneo.Id">{! torneo.Nombre !}</option>
+                            </select>
+                            <label for="firstName" class="mt-n5">Torneo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <select class="custom-select d-block w-100" v-model="Categoria" required>
+                                <option disabled value="">Selecciona uno ...</option>
+                                <option v-for="categoria in CategoriaList" :value="categoria.id">{! categoria.nombre
+                                    !}
+                                </option>
+                            </select>
+                            <label for="firstName" class="mt-n5">Categoria</label>
+                            <div class="invalid-feedback">
+                                Campo requerido
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid row  -->
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <div class="md-form form-group">
+                            <select class="custom-select d-block w-100" v-model="Jornada" required>
+                                <option disabled value="">Selecciona uno ...</option>
+                                <option v-for="jornada in JornadaList" :value="jornada.Id">{! jornada.Nombre !}</option>
+                            </select>
+                            <label for="firstName" class="mt-n5">Jornada</label>
+                            <div class="invalid-feedback">
+                                *.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid row  -->
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <input type="text" class="form-control" placeholder="xxxx xxxx xxxx xxxx"
+                                   v-model="NumeroDeTarjeta" v-show="isTarjetaHidden" >
+                            <label for="lastName">No Tarjeta</label>
+                            <div class="invalid-feedback">
+                                Campo requerido
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="md-form form-group">
+                            <input type="date" class="form-control" v-model="FechaDePago">
+                            <label for="FechaDePago">Fecha de Pago </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grid row -->
+                <button value="AGREGAR" class="col-md-12 btn btn-primary form-row mb-5">AGREGAR</button>
+
+            </form>
+            <!-- Extended material form grid -->
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="/js/procesos/crudSolicitudEgreso.js" type="text/javascript"></script>
+
+{% endblock %}

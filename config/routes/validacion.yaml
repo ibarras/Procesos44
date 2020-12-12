@@ -1,0 +1,3 @@
+autorizacion_activos_fijos:
+    path: /codigo-activos-fijos
+    controller: App\Controller\Procesos\IcActivosFijosController::getAutorizacion

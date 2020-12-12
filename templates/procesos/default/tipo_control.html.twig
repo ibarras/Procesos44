@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<style>
+    .card-img-top{
+        height: 200px;
+        width: 200px;
+        margin-left: 100px;
+    }
+    .card{ margin-top: 20px;}
+    .card-footer { text-align: center;}
+</style>
+
+    <div class="row">
+
+        <div class="row">
+            {% for proceso in procesos %}
+
+            <div class="col-sm">
+                <div class="card">
+                    <a href="{{ path('procesos_menu_procedimiento', { 'idProcedimiento': proceso.id })}}">
+                    <img class="card-img-top" src="/uploads/imagen/procesos/{{ proceso.imagen }}"  alt="{{ proceso.title }}">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">{{ proceso.descripcion }}</p>
+
+                    </div>
+                    <div class="card-footer">{{ proceso.title }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

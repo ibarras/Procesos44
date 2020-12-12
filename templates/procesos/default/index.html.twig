@@ -1,0 +1,50 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <style>
+        .card-img-top{
+            height: 120px;
+            width: 120px;
+            margin-left: 100px;
+        }
+        .card{ margin-top: 20px;}
+        .card-footer { text-align: center;}
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm">
+            <div class="card">
+                <a href="{{ path('procesos_tipo_control', {'idMacroproceso': 1, 'nombre': 'gestion-de-marca'} ) }}">
+                    <img class="card-img-top" src="/bundles/procesos/images/gestionmarca.png"  alt="Gestion de Marca">
+                </a>
+                <div class="card-body"></div>
+                <div class="card-footer">Gestion de Marca</div>
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <div class="card">
+                <a href="{{ path('procesos_tipo_control', {'idMacroproceso': 2, 'nombre': 'gestion-de-recursos'} ) }}">
+                    <img class="card-img-top" src="/bundles/procesos/images/gestionrecursos.png">
+                </a>
+                <div class="card-body"></div>
+                <div class="card-footer">Gestion de Recursos</div>
+            </div>
+        </div>
+
+        <div class="col-sm">
+            <div class="card">
+                <a href="{{ path('procesos_tipo_control', {'idMacroproceso': 3, 'nombre': 'gestion-deportiva'} ) }}">
+                    <img class="card-img-top" src="/bundles/procesos/images/gestiondeportiva.png">
+                </a>
+
+                <div class="card-body"></div>
+                <div class="card-footer">Gestion Deportiva</div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

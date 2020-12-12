@@ -1,0 +1,144 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}IcProcedimientos index{% endblock %}
+
+{% block content %}
+    <div class="row" id="file" >
+        <div class="col-md-6">            
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header">
+                        <div class="fa success"> Documentos:  &nbsp;{{ porcentaje  |slice(0, 4)}} <i class="far fa-chart-bar"></i>
+                        <p>Martin Ibarra </p>
+                        </div>
+                    </div>
+                    <ul class="list-group"></ul>
+                    {% for key , value in documentos %}
+
+                        <li class="list-group-item ">
+                         
+                            <div class="md-v-line">
+                              <p>
+                                {% if value %} <i class="far fa-image fa-1x mr-4 grey p-2 white-text rounded-circle " aria-hidden="true"></i> {%endif %}
+                                  
+                                 {{ key | replace({'_': ' '}) }}
+                                </p>
+                                
+                            </div>
+                           
+                            </li>
+                        {% endfor %}
+                      </ul>
+
+                </div>
+
+                <template>
+                    <div class="row">
+                        <div class="col-md-8 ">
+                            <label>File
+                                <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                            </label>
+                            <button v-on:click="submitFile()">Submit</button>
+                        </div>
+                    </div>
+                </template>
+
+            </div>
+            
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+        {{ parent() }}
+<script>
+
+    /*
+      Defines the data used by the component
+    */
+    new Vue({
+        delimiters: ['@{', '}'],
+        el: '#file',
+
+        created: function () {
+            this.onFaltantes();
+        },
+
+
+        data(){
+
+            return {
+                file: ''
+            }
+            Tipo: ''
+        },
+
+        methods: {
+
+            onFaltantes: function (){
+                let url='/admin/faltantes';
+
+                axios.get(url).then( (response) =>{
+                    console.log(response.data);
+
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+
+
+
+
+            /*
+              Submits the file to the server
+            */
+            submitFile(){
+                /*
+                        Initialize the form data
+                    */
+                let formData = new FormData();
+
+                /*
+                    Add the form data we need to submit
+                */
+                formData.append('file', this.file);
+
+                /*
+                  Make the request to the POST /single-file URL
+                */
+                const params = {
+                        // facturacion
+                        Tipo: 'mi tipo'
+                    };
+                axios.post( '/admin/profile-upload-files',
+
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }, params
+                    },
+
+                ).then(function(){
+                    console.log('SUCCESS!!');
+                })
+                    .catch(function(){
+                        console.log('FAILURE!!');
+                    });
+            },
+
+            /*
+              Handles a change on the file upload
+            */
+            handleFileUpload(){
+                this.file = this.$refs.file.files[0];
+            }
+        }
+    })
+    ;
+</script>
+
+{% endblock %}

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ic_fos_perfil", indexes={@ORM\Index(name="IDX_BD5EE3A55CB4216A", columns={"id_area"}), @ORM\Index(name="IDX_BD5EE3A542B686", columns={"id_centro"}), @ORM\Index(name="IDX_BD5EE3A573B102B2", columns={"id_direccion"}), @ORM\Index(name="IDX_BD5EE3A56D6D134", columns={"id_fos"}), @ORM\Index(name="IDX_BD5EE3A53E83D982", columns={"id_gerencia"}), @ORM\Index(name="IDX_BD5EE3A561F46733", columns={"id_puesto"})})
  * @ORM\Entity
+  * @ORM\Entity(repositoryClass="App\Repository\IcFosPerfilRepository")
  */
 class IcFosPerfil
 {
@@ -594,6 +595,11 @@ class IcFosPerfil
         $this->idPuesto = $idPuesto;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 
 

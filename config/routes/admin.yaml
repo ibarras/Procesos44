@@ -1,8 +1,17 @@
 # app/config/routing.yml
 
+
 procesos_upload_file:
   path: /procesos-upload-files
   controller: App\Controller\Admin\IcProcesosController::uploadFile
+
+profile_upload_file:
+    path: /profile-upload-files
+    controller: App\Controller\Admin\IcDocumentosPerfilController::uploadFile
+
+profile_faltantes:
+    path: /faltantes
+    controller: App\Controller\Admin\IcDocumentosPerfilController::getfaltantes
 
 procesos_macroprocesos:
   path: /club-tijuana-macroprocesos
@@ -124,19 +133,22 @@ procesos_instructivo_eliminar:
     iDescripcion: '\d+'
 
 #
-# Perfil de usuario Admin
+# Usuarios
 #
 
-procesos_perfil:
-  path: /perfil-de-usuario
-  controller: App\Controller\Admin\IcFosPerfilController::index
+procesos_usuarios:
+    path: /usuarios
+    controller: App\Controller\Admin\IcUsuariosController::index
+#
+# Perfil de usuario Admin
+#
 
 procesos_perfil_agregar:
   path: /{idPerfil}/nuevo-perfil-de-usuario
   controller: App\Controller\Admin\IcFosPerfilController::new
 
 procesos_perfil_modificar:
-  path: /modificar-perfil-de-usuario/{idPerfil}
+  path: /{idPerfil}/modificar-perfil-de-usuario
   controller: App\Controller\Admin\IcFosPerfilController::edit
   requirements:
     idPerfil: '\d+'
@@ -146,10 +158,6 @@ procesos_perfil_borrar:
   controller: App\Controller\Admin\IcFosPerfilController::delete
   requirements:
     idPerfil: \d+
-
-procesos_usuarios:
-  path: /usuarios
-  controller: App\Controller\FixController::IcUsuario:index }
 
 #
 #Centro de Trabajo
@@ -229,19 +237,19 @@ procesos_gerencia_eliminar:
 
 procesos_puesto:
   path: /puesto
-  controller: App\Controller\Admin\IcPuestoController::index}
+  controller: App\Controller\Admin\IcPuestoController::index
 
 procesos_puesto_mostrar:
   path: /{idPuesto}/mostrar-puesto
-  controller: App\Controller\Admin\IcPuestoController::show}
+  controller: App\Controller\Admin\IcPuestoController::show
 
 procesos_puesto_editar:
   path: /{idPuesto}/editar-puesto
-  controller: App\Controller\Admin\IcPuestoController::edit}
+  controller: App\Controller\Admin\IcPuestoController::edit
 
 procesos_puesto_agregar:
   path: /agregar-puesto
-  controller: App\Controller\Admin\IcPuestoController::new}
+  controller: App\Controller\Admin\IcPuestoController::new
 
 
 
@@ -275,20 +283,6 @@ procesos_categoria_eliminar:
   requirements:
     idCategoria: '\d+'
 
-#
-#Categoria Usuario
-#
-#procesos_categoria_usuario:
-#  path: /categorias-del-usuario
-#  controller: App\Controller\FixController::IcCategoriaUsuario:index}
-#
-#procesos_subcategoria:
-#  path: /subcentro-costo
-#  controller: App\Controller\FixController::IcSubcategoria:index}
-#
-#procesos_subcategoria_usuario:
-#  path: /subcategorias-del-usuario
-#  controller: App\Controller\FixController::IcSubcategoriaUsuario:index}
 
 
 #
@@ -313,3 +307,15 @@ procesos_area_agregar:
 procesos_area_eliminar:
   path: /procedimiento-eliminar-area
   controller: App\Controller\Admin\IcAreaController::delete
+
+#
+# Documentos Perfil
+#
+
+procesos_documentos_perfil:
+  path: /documentos-de-usuario
+  controller: App\Controller\Admin\IcDocumentosPerfilController::index
+
+procesos_documentos_perfil_agregar:
+  path: /agregar-documentos-de-usuario
+  controller: App\Controller\Admin\IcDocumentosPerfilController::new

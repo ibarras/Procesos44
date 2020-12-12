@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * IcSolicitudDescripcion
  *
  * @ORM\Table(name="ic_solicitud_descripcion", indexes={@ORM\Index(name="IDX_1F6EEEB416E7C0E7", columns={"id_solicitud"}), @ORM\Index(name="IDX_1F6EEEB42DE7A93B", columns={"id_cuenta_contable"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcSolicitudDescripcionRepository")
  */
 class IcSolicitudDescripcion
 {
@@ -24,42 +26,42 @@ class IcSolicitudDescripcion
 
     /**
      * @var string
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="descripcion", type="string", length=200, nullable=false)
      */
     private $descripcion;
 
     /**
      * @var string
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="tipo_de_gasto", type="string", length=100, nullable=false)
      */
     private $tipoDeGasto;
 
     /**
      * @var string
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="presupuesto", type="string", length=20, nullable=false)
      */
     private $presupuesto;
 
     /**
      * @var string
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="precio_real", type="string", length=20, nullable=false)
      */
     private $precioReal;
 
     /**
      * @var string
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="variacion", type="string", length=20, nullable=false)
      */
     private $variacion;
 
     /**
      * @var string
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="total", type="string", length=20, nullable=false)
      */
     private $total;
@@ -80,7 +82,7 @@ class IcSolicitudDescripcion
 
     /**
      * @var bool
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="retirar_saldo", type="boolean", nullable=false)
      */
     private $retirarSaldo;
@@ -101,7 +103,7 @@ class IcSolicitudDescripcion
 
     /**
      * @var \IcSolicitud
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcSolicitud")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_solicitud", referencedColumnName="id")
@@ -111,7 +113,7 @@ class IcSolicitudDescripcion
 
     /**
      * @var \IcCuentaContable
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcCuentaContable")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_cuenta_contable", referencedColumnName="id")

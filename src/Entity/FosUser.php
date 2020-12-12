@@ -3,14 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * FosUser
  *
- * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"})}, indexes={@ORM\Index(name="IDX_957A6479B052C3AA", columns={"id_perfil"})})
+ * @ORM\Table(name="fos_user", uniqueConstraints={@ORM\UniqueConstraint(name="uniq_957a6479a0d96fbf", columns={"email_canonical"}), @ORM\UniqueConstraint(name="uniq_957a647992fc23a8", columns={"username_canonical"}), @ORM\UniqueConstraint(name="uniq_957a6479c05fb297", columns={"confirmation_token"})})
+ *
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcFosUserRepository")
  */
-class FosUser
+class FosUser implements UserInterface
 {
     /**
      * @var int
@@ -99,22 +102,6 @@ class FosUser
      */
     private $roles;
 
-    /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="perfil", type="boolean", nullable=true)
-     */
-    private $perfil;
-
-    /**
-     * @var \IcFosPerfil
-     *
-     * @ORM\ManyToOne(targetEntity="IcFosPerfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_perfil", referencedColumnName="id_perfil")
-     * })
-     */
-    private $idPerfil;
 
     public function getId(): ?int
     {
@@ -243,7 +230,7 @@ class FosUser
 
     public function getRoles(): ?array
     {
-        return $this->roles;
+         	return $this->roles;  //['ROLE_USER'];
     }
 
     public function setRoles(array $roles): self
@@ -253,29 +240,36 @@ class FosUser
         return $this;
     }
 
-    public function getPerfil(): ?bool
+
+    public function serialize()
     {
-        return $this->perfil;
+        return serialize([
+            $this->id,
+            $this->username,
+            $this->usernameCanonical,
+            $this->emailCanonical,
+            $this->email,
+            $this->enabled
+        ]);
     }
 
-    public function setPerfil(?bool $perfil): self
+    public function unserialize($serialized)
     {
-        $this->perfil = $perfil;
-
-        return $this;
-    }
-
-    public function getIdPerfil(): ?IcFosPerfil
-    {
-        return $this->idPerfil;
-    }
-
-    public function setIdPerfil(?IcFosPerfil $idPerfil): self
-    {
-        $this->idPerfil = $idPerfil;
-
-        return $this;
+        list($this->id,
+            $this->username,
+            $this->usernameCanonical,
+            $this->emailCanonical,
+            $this->email,
+            $this->enabled ) = unserialize($serialized);
     }
 
 
+    public function eraseCredentials(){}
+
+    public function getProfile():self{}
+
+    public function __toString()
+    {
+        return $this->username;
+    }
 }

@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Instructivo: <strong>{{ instructivo.title }}</strong></h4>
+                </div>
+                <div class="card-body">
+                    {{ instructivo.descripcion | raw }}
+                    <div class="card-footer">
+                        {% if instructivo.idSolicitud is not empty %}
+
+                            <h4>Este instructivo tiene un formulario para completar</h4>
+                            <h5>{{ instructivo.idSolicitud.nombre }}</h5>
+
+                            <a href="{{ path('procesos_instructivo_agregar', {'iTrabajo': instructivo.id }) }}"
+                               class="fa btn btn-primary btn-sm" >Fomulario de Solicitud</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ app.request.headers.get('referer') }}">
+                        <button type="button" class="btn btn-primary" >Regresar</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

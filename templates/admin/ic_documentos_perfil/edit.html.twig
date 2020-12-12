@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Edit IcDocumentosPerfil{% endblock %}
+
+{% block body %}
+    <h1>Edit IcDocumentosPerfil</h1>
+
+    {{ include('ic_documentos_perfil/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('ic_documentos_perfil_index') }}">back to list</a>
+
+    {{ include('ic_documentos_perfil/_delete_form.html.twig') }}
+{% endblock %}

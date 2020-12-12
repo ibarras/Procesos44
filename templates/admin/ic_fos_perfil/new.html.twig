@@ -1,21 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Direccion {% endblock %}
 
 {% block content %}
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-1">
-            <h1>Perfil de Usuario</h1>
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1>Nuevo Perfil</h1>
+                    <h4>Nuevo Perfil de Usuario: <stgrong>{{ fos.username}} </stgrong> </h4>
                 </div>
                 <div class="card-body">
-                    {{ include('ic_fos_perfil/_form.html.twig') }}
+                    {{ include('admin/ic_fos_perfil/_form.html.twig') }}
                 </div>
                 <div class="card-footer">
-                    <a href="{{ path('procesos_perfil') }}">Regresar</a>
                 </div>
             </div>
         </div>

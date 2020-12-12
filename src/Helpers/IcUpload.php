@@ -104,6 +104,8 @@ class IcUpload{
 
     	return $this->imagen;
     }
+
+
     
     /**
      * Get file.

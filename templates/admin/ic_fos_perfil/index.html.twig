@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block title %}Direccion {% endblock %}
 
@@ -38,6 +38,7 @@
                         <td>
                             <a class="btn btn-md btn-mdb-color"
                                href="{{ path('procesos_perfil_modificar', {'idPerfil': ic_fos_perfil.idPerfil}) }}">Editar</a>
+
                         </td>
                     </tr>
                 {% else %}

@@ -11,11 +11,33 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\File;
 
 
 class IcProcesosController extends AbstractController
 {
+    public function uploadFile(Request $request): JsonResponse
+    {
+        try{
+            $file = $request->files->get('upload');
 
+            $pro = new IcProcesos();
+            $pro->setIcImagen($file);
+            $image = $pro->getImagen();
+
+            $data = array(
+                "uploaded" => 1,
+                "fileName" => $image,
+                "url"      =>   '/uploads/imagen/procesos/' . $image,
+            );
+            return new JsonResponse($data);
+
+        }catch (\Exception $exception){
+            $this->addFlash('danger', 'Ocurrio un error al subir el archivo ' . $exception->getMessage());
+        }
+        return new JsonResponse($data);
+
+    }
     public function macroprocesos(): Response
     {
         $macro = $this->getDoctrine()

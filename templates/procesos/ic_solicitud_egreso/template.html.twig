@@ -1,0 +1,255 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="solicitud" id="template-egresos">
+
+        <div class="row">
+
+            <div class="col">
+                <label>Solicitante: <strong>{{ solicitud.idPerfilSolicita }}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col">
+                <label>Autorizado:<strong>{% if solicitud.idPerfilAutoriza is empty %} Pendiente de Autorizacion {% else %} {{ solicitud.idPerfilAutoriza }} {% endif %}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col solicitud" >
+                <label>Solicitud:<strong>{{ (solicitud.IdTipoSolicitud) }}</strong> </label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col solicitud">
+                <label>Estatus: <strong>{{ solicitud.esActivo? 'Activo' : 'Pendiente'  }} </strong></label>
+                <hr class="mt-0"/>
+            </div>
+            <hr class="mt-0"/>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col">
+                <label>Creado: <strong>{{ solicitud.fecha |date('d/M/Y') }}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col">
+                <label>Para Pago: <strong>{{ solicitud.fechaTransferencia | date('d/M/Y') }}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col">
+                <label>Importe:<strong>{{ solicitud.importe }}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col">
+                <p>No Tarjeta: <strong>{{ solicitud.numeroTarjeta }}</strong></p>
+                <hr class="mt-0"/>
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col">
+                <label> Direccion: <strong>{{ solicitud.idDireccion }}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col">
+                <label>Centro de Costo:<strong>{{ solicitud.idCentroOrganizativo }}</strong></label>
+                <hr class="mt-0"/>
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col">
+                <label>Torneo: <strong>{{ solicitud.idTorneo |upper }}</strong> </label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col">
+                <label>Categoria:<strong>{{ solicitud.idTorneoCategoria |upper }} </strong></label>
+                <hr class="mt-0"/>
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col">
+                <label>Motivo: <strong>{{ solicitud.motivoDeGasto }}</strong> </label>
+                <hr class="mt-0"/>
+            </div>
+            <div class="col">
+                <label>Jornada: <strong>{{ solicitud.idJornada|upper }} {{ solicitud.id }}</strong></label>
+                <hr class="mt-0"/>
+
+            </div>
+        </div>
+
+
+        <div>
+
+
+            <div class="row" v-if="isInformacionGastosHidden">
+
+                <hr class="mt-0"/>
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Cuenta Contable</th>
+                        <th scope="col">Descripcion de la compra</th>
+                        <th scope="col">Presupuesto</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Variacion</th>
+                        <th scope="col">Autorizado por</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <tr v-for="item in EgresoDescripcionList"  >
+
+                        <td>{!item.cuenta !}</td>
+                        <td>{!item.facturado !}</td>
+                        <td>{! item.presupuesto !}</td>
+                        <td>{! item.real !}</td>
+                        <td>{! item.variacion !} </td>
+                        <td v-if="item.autoriza">{! item.autoriza !} </td>
+                        <td v-else>Sin autorizacion</td>
+
+                        <td>
+{#                            <button v-if="item.esActivo == true" type="button" class="btn btn-primary btn-sm" data-toggle="modal"#}
+{#                                    v-on:click="changeId(item)"  data-target="#my-modal-xl" >Deposito</button>#}
+{#                            <button type="button" class="btn btn-danger btn-sm" v-on:click="onClickDeleteDescripcion(item.id)">Eliminar</button>#}
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        {#                        <td>Total Presupuesto: {! TotalesDescripcion.presupuesto !}</td>#}
+                        {#                        <td>Precio Real: {! TotalesDescripcion.real !}</td>#}
+                        {#                        <td>Variacion {! TotalesDescripcion.variacion !}</td>#}
+                    </tr>
+                    </tbody>
+                </table>
+
+                <hr class="mt-0"/>
+                <table class="table" v-if="isDespositoHidden">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Nombre del Proveedor</th>
+                        <th scope="col">Cuenta Contable</th>
+                        <th scope="col">Tipo de gasto</th>
+                        <th scope="col">No Cuenta / Clabe</th>
+                        <th scope="col">Banco</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Autoriza</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="item in DepositoList" >
+
+                        <td>{! item.beneficiario!}</td>
+                        <td>{! item.cuentaContable !}</td>
+                        <td>{! item.tipoGasto !}</td>
+                        <td>{! item.cuenta !}</td>
+                        <td>{! item.banco !}</td>
+                        <td>{! item.cantidad !} </td>
+                        <td v-if="item.autoriza">{! item.autoriza !} </td>
+
+                        <td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Total Deposito: {! TotalDeposito !}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        new Vue({
+            delimiters: ['{!', '!}'],
+            el: '#template-egresos',
+
+            created: function () {
+                this.item = {{ solicitud.id }};
+                this.onClickShowSolicitudEgresos();
+            },
+
+            data: {
+
+                EgresoList: [],
+                TotalesDescripcion: [],
+                cuentasList: [],
+                TotalDeposito: '',
+
+                // facturacion
+                proveedor:'',
+                tipoGasto: '',
+                cuentaClabe: '',
+                banco: '',
+
+                // FacturacionList: [],
+                DepositoList: [],
+                EgresoDescripcionList: [],
+
+                isDespositoHidden: false,
+
+                cuenta: null,
+                facturado: null,
+                presupuesto: null,
+                real: null,
+
+                id :  $("#solicitud").attr('value'),
+                idDeposito: '',
+                item: '',
+            },
+            mounted() {},
+            watched: {},
+            computed: {},
+
+            methods: {
+
+
+                onClickShowSolicitudEgresos: function () {
+
+                    this.isInformacionGastosHidden = true;
+                    let url = '/mostrar-solicitud-egresos/'+ this.item;
+                    axios.get(url).then(response => {
+
+                        this.EgresoList = response.data.forma;
+                        this.EgresoDescripcionList = response.data.descripcion;
+                        this.TotalesDescripcion = response.data.totales;
+
+                        if(response.data.deposito){
+                            this.isDespositoHidden = true;
+                            this.DepositoList = response.data.deposito;
+                            this.TotalDeposito = response.data.totalDeposito;
+                        }
+                        this.isGastosHidden = true;
+                        console.log(response.data);
+
+                    }).catch(error => {
+                        this.errors = 'Erro al obtener la inforamacion de las solicitudes';
+                        console.log(error);
+                    });
+
+                },
+            }, //fin de methods
+
+        })
+        ;
+
+
+    </script>
+
+{% endblock %}

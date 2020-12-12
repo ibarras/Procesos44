@@ -3,12 +3,23 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * IcSolicitud
  *
- * @ORM\Table(name="ic_solicitud", indexes={@ORM\Index(name="IDX_3FDCD56457577DBC", columns={"id_centro_costo"}), @ORM\Index(name="IDX_3FDCD56462CA3EBB", columns={"id_centro_organizativo"}), @ORM\Index(name="IDX_3FDCD56473B102B2", columns={"id_direccion"}), @ORM\Index(name="IDX_3FDCD564BF4FB5CF", columns={"id_jornada"}), @ORM\Index(name="IDX_3FDCD56449DA7E88", columns={"id_tipo_solicitud"}), @ORM\Index(name="IDX_3FDCD5645ADCD613", columns={"id_torneo"}), @ORM\Index(name="IDX_3FDCD5647E1F64C2", columns={"id_torneo_categoria"}), @ORM\Index(name="IDX_3FDCD564205491AC", columns={"id_perfil_autoriza"}), @ORM\Index(name="IDX_3FDCD564CB870C58", columns={"id_perfil_solicita"})})
+ * @ORM\Table(name="ic_solicitud", indexes={@ORM\Index(name="IDX_3FDCD56457577DBC", columns={"id_centro_costo"}),
+ *     @ORM\Index(name="IDX_3FDCD56462CA3EBB", columns={"id_centro_organizativo"}),
+ *     @ORM\Index(name="IDX_3FDCD56473B102B2", columns={"id_direccion"}),
+ *     @ORM\Index(name="IDX_3FDCD564BF4FB5CF", columns={"id_jornada"}),
+ *     @ORM\Index(name="IDX_3FDCD56449DA7E88", columns={"id_tipo_solicitud"}),
+ *      @ORM\Index(name="IDX_3FDCD5645ADCD613", columns={"id_torneo"}),
+ *      @ORM\Index(name="IDX_3FDCD5647E1F64C2", columns={"id_torneo_categoria"}) })
+ *
+
  * @ORM\Entity
+* @ORM\Entity(repositoryClass="App\Repository\IcSolicitudRepository")
+ * 
  */
 class IcSolicitud
 {
@@ -24,7 +35,7 @@ class IcSolicitud
 
     /**
      * @var \DateTime
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="fecha", type="date", nullable=false)
      */
     private $fecha;
@@ -73,7 +84,7 @@ class IcSolicitud
 
     /**
      * @var bool
-     *
+     * @Assert\NotNull
      * @ORM\Column(name="es_activo", type="boolean", nullable=false)
      */
     private $esActivo = false;
@@ -90,7 +101,7 @@ class IcSolicitud
 
     /**
      * @var \IcCentroOrganizativoDireccion
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcCentroOrganizativoDireccion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_centro_organizativo", referencedColumnName="id")
@@ -100,7 +111,7 @@ class IcSolicitud
 
     /**
      * @var \IcDireccion
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcDireccion")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_direccion", referencedColumnName="id_direccion")
@@ -110,7 +121,7 @@ class IcSolicitud
 
     /**
      * @var \IcTorneoJornada
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcTorneoJornada")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_jornada", referencedColumnName="id")
@@ -130,7 +141,7 @@ class IcSolicitud
 
     /**
      * @var \IcTorneo
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcTorneo")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_torneo", referencedColumnName="id")
@@ -140,7 +151,7 @@ class IcSolicitud
 
     /**
      * @var \IcTorneoCategoria
-     *
+     * @Assert\NotNull
      * @ORM\ManyToOne(targetEntity="IcTorneoCategoria")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_torneo_categoria", referencedColumnName="id")
@@ -149,24 +160,26 @@ class IcSolicitud
     private $idTorneoCategoria;
 
     /**
-     * @var \IcFosPerfil
+     * @var \FosUser
      *
-     * @ORM\ManyToOne(targetEntity="IcFosPerfil")
+     * @ORM\ManyToOne(targetEntity="FosUser")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_perfil_autoriza", referencedColumnName="id_perfil")
+     *   @ORM\JoinColumn(name="id_usuario_autoriza", referencedColumnName="id", nullable=true)
      * })
      */
-    private $idPerfilAutoriza;
+    private $idUsuarioAutoriza;
+
 
     /**
-     * @var \IcFosPerfil
+     * @var \FosUser
+     * @Assert\NotNull
      *
-     * @ORM\ManyToOne(targetEntity="IcFosPerfil")
+     * @ORM\ManyToOne(targetEntity="FosUser")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_perfil_solicita", referencedColumnName="id_perfil")
+     *   @ORM\JoinColumn(name="id_usuario_solicita", referencedColumnName="id", nullable=false)
      * })
      */
-    private $idPerfilSolicita;
+    private $idUsuarioSolicita;
 
     public function getId(): ?int
     {
@@ -353,26 +366,26 @@ class IcSolicitud
         return $this;
     }
 
-    public function getIdPerfilAutoriza(): ?IcFosPerfil
+    public function getIdUsuarioAutoriza(): ?FosUser
     {
-        return $this->idPerfilAutoriza;
+        return $this->idUsuarioAutoriza;
     }
 
-    public function setIdPerfilAutoriza(?IcFosPerfil $idPerfilAutoriza): self
+    public function setIdUsuarioAutoriza(?FosUser $idUsuarioAutoriza): self
     {
-        $this->idPerfilAutoriza = $idPerfilAutoriza;
+        $this->idUsuarioAutoriza = $idUsuarioAutoriza;
 
         return $this;
     }
 
-    public function getIdPerfilSolicita(): ?IcFosPerfil
+    public function getIdUsuarioSolicita(): ?FosUser
     {
-        return $this->idPerfilSolicita;
+        return $this->idUsuarioSolicita;
     }
 
-    public function setIdPerfilSolicita(?IcFosPerfil $idPerfilSolicita): self
+    public function setIdUsuarioSolicita(?FosUser $idUsuarioSolicita): self
     {
-        $this->idPerfilSolicita = $idPerfilSolicita;
+        $this->idUsuarioSolicita = $idUsuarioSolicita;
 
         return $this;
     }

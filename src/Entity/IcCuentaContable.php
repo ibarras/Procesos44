@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ic_cuenta_contable", indexes={@ORM\Index(name="IDX_D75D57057577DBC", columns={"id_centro_costo"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcCuentaContableRepository")
  */
 class IcCuentaContable
 {

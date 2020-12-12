@@ -19,7 +19,7 @@ class IcPuestoController extends AbstractController
             ->getRepository(IcPuesto::class)
             ->findAll();
 
-        return $this->render('ic_puesto/index.html.twig', [
+        return $this->render('admin/ic_puesto/index.html.twig', [
             'ic_puestos' => $icPuestos,
         ]);
     }
@@ -39,7 +39,7 @@ class IcPuestoController extends AbstractController
             return $this->redirectToRoute('ic_puesto_index');
         }
 
-        return $this->render('ic_puesto/new.html.twig', [
+        return $this->render('admin/ic_puesto/new.html.twig', [
             'ic_puesto' => $icPuesto,
             'form' => $form->createView(),
         ]);
@@ -48,7 +48,7 @@ class IcPuestoController extends AbstractController
 
     public function show(IcPuesto $icPuesto): Response
     {
-        return $this->render('ic_puesto/show.html.twig', [
+        return $this->render('admin/ic_puesto/show.html.twig', [
             'ic_puesto' => $icPuesto,
         ]);
     }
@@ -65,7 +65,7 @@ class IcPuestoController extends AbstractController
             return $this->redirectToRoute('ic_puesto_index');
         }
 
-        return $this->render('ic_puesto/edit.html.twig', [
+        return $this->render('admin/ic_puesto/edit.html.twig', [
             'ic_puesto' => $icPuesto,
             'form' => $form->createView(),
         ]);

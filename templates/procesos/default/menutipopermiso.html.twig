@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-3 col-sm-offset-3">
+                <a href="{{path('procesos_seleccionar_puesto_requisicion_personal')}}"><img class="img-responsive" src="/bundles/icprocesos/images/requisicionPersonal.png" >
+                <label>Ausencia completa</label></a>
+            </div>
+            <div class="col-sm-3" align="center">
+                <a href="{{path('procesos_seleccionar_area_solicitud_baja')}}"><img class="img-responsive" src="/bundles/icprocesos/images/solicitudBaja.png">
+                <label>Ausencia temporal</label></a>
+            </div>
+
+            <div class="col-sm-3" align="center">
+                <a href="{{path('procesos_seleccionar_area_solicitud_baja')}}"><img class="img-responsive" src="/bundles/icprocesos/images/solicitudVacaciones.png">
+                <label>Retardo</label></a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+{% endblock %} 

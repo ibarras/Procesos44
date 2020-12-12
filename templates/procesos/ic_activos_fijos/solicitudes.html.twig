@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div class="row" id="salida-activos-fijos">
+
+        <div class="col-sm-12" >
+            <div class="card">
+                <div class="card-header">
+                    <h3>Solicitudes con autorizacion de salida </h3>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Serie</th>
+                            <th>Modelo</th>
+                            <th>Marca</th>
+                            <th>Ubicacion</th>
+                            <th>Codigo Barras</th>
+                            <th>Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <tr>
+                            {% for a in solicitudes %}
+                            <td>{{ a.idActivoFijo.serie }}</td>
+                            <td>{{ a.idActivoFijo.modelo }}</td>
+                            <td>{{ a.idActivoFijo.marca }}</td>
+                            <td>{{ a.idActivoFijo.ubicacion }}</td>
+                            <td>{{ a.idActivoFijo.codigoBarras }}</td>
+
+                            <td>
+                                <form method="post" action="{{ path('activos_salida_fecha') }}" onsubmit="return confirm('Confirmar Salida?');">
+                                    <input type="hidden" name="_method" value="POST">
+                                    <input type="hidden" name="Activo" value="{{ a.idActivoFijo.id }}">
+                                    <button class="btn btn-primary btn-md">Confirmar</button>
+                                </form>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

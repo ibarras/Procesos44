@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block content %}
 
@@ -21,7 +21,7 @@
                     {% else %}
 
                         <a type="button" class="btn btn-primary btn-md"
-                           href="{{ path('procesos_instruccion_mostrar', {'idInstructivo': instructivo.id }) }}">
+                           href="{{ path('procesos_instruccion_mostrar', {'id': instructivo.id }) }}">
                             Instruccion de Trabajo
                         </a>
 

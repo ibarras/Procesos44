@@ -19,7 +19,7 @@ class IcCentroTrabajoController extends AbstractController
             ->getRepository(IcCentroTrabajo::class)
             ->findAll();
 
-        return $this->render('ic_centro_trabajo/index.html.twig', [
+        return $this->render('admin/ic_centro_trabajo/index.html.twig', [
             'ic_centro_trabajos' => $icCentroTrabajos,
         ]);
     }
@@ -39,7 +39,7 @@ class IcCentroTrabajoController extends AbstractController
             return $this->redirectToRoute('ic_centro_trabajo_index');
         }
 
-        return $this->render('ic_centro_trabajo/new.html.twig', [
+        return $this->render('admin/ic_centro_trabajo/new.html.twig', [
             'ic_centro_trabajo' => $icCentroTrabajo,
             'form' => $form->createView(),
         ]);
@@ -54,10 +54,10 @@ class IcCentroTrabajoController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
             $this->addFlash('success', 'Elemento modificado con exito');
-            return $this->redirectToRoute('ic_centro_trabajo_index');
+            return $this->redirectToRoute('admin/ic_centro_trabajo_index');
         }
 
-        return $this->render('ic_centro_trabajo/edit.html.twig', [
+        return $this->render('admin/ic_centro_trabajo/edit.html.twig', [
             'ic_centro_trabajo' => $icCentroTrabajo,
             'form' => $form->createView(),
         ]);

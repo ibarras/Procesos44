@@ -1,0 +1,17 @@
+{# templates/emails/signup.html.twig #}
+
+<h3>Solicitud de Salida de Equipo</h3>
+
+<p>
+    Por medio de la presente Solicito permiso para sacar el siguiente equipo:
+</p>
+<h4>Serie: {{ serie }}</h4>
+<h4>Modelo: {{ modelo }}</h4>
+<h4>Marca: {{ marca }}</h4>
+<h4>Descripcion: {{ descripcion }}</h4>
+<h4>Coigo Interno: {{ codigo_interno }}</h4>
+
+
+<p>
+    <a href="{{ path('activos_autorizacion', {'codigo': codigo_autorizacion, 'correo': correo }) }}" target="_blank">Click para autorizar la salida del equipo</a>
+</p>

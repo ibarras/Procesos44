@@ -1,0 +1,78 @@
+    <nav class="navbar navbar-inverse top-nav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <ul>
+                    <li><a href="#" class="menu-icon" id="btn-menu"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="{{path('procesos_inicio')}}" class="home"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    <form class="navbar-form navbar-left">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Buscar">
+                        </div>
+                    </form>
+                </ul>
+
+                <ul class="navbar-right">
+                    <li><a href="#" class="profil"><span class="badge">24 {{ app.session.get('_global_message') }}</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="side-navbar" id="sideNav">
+            <div class="side-nave-iner">
+                <ul>
+                    <li class="side-li"><a href="#"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="texto">Solicitudes</span></a></li>
+
+                    <li class="side-li"><a href="{{ path('procesos_personal') }}"><i class="fa fa-file-text"></i><span class="texto">Solicitud de Personal</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_solicitud_producto') }}"><i class="fa fa-file-text"></i><span class="texto">Solicitud de Producto</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_solicitud_ausencia') }}"><i class="fa fa-file-text"></i><span class="texto">Solicitud de Ausencia</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_solicitud_vacaciones') }}"><i class="fa fa-file-text"></i><span class="texto">Solicitud de Vacaciones</span></a></li>
+
+                    <li class="side-li"><a href="{{ path('procesos_perfil') }}"><i class="fa fa-user"></i><span class="texto">Perfil de Usuarios</span></a></li>
+
+
+                    <li class="side-li"><a href="{{ path('procesos_centro') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Centro de Trabajo</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_direccion') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Direccion</span></a></li>
+
+                    <li class="side-li"><a href="{{ path('procesos_gerencia') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Gerencia</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_area') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Area</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_puesto') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Puesto</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_categoria') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Categoria</span></a></li>
+
+                    <li class="side-li"><a href="{{ path('procesos_categoria_usuario') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">Categoria-Usuario</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_subcategoria_usuario') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">SubCategoria</span></a></li>
+                    <li class="side-li"><a href="{{ path('procesos_direccion') }}"><i class="fa fa-user" aria-hidden="true"></i><span class="texto">SubCategoria-Usuario</span></a></li>
+
+
+                    </li>
+                </ul>
+            </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('procesos_inicio') }}"><i class="fa fa-home"></i></a>
+        </div>
+    </div>
+
+

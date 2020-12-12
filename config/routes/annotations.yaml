@@ -5,3 +5,26 @@ controllers:
 kernel:
     resource: ../../src/Kernel.php
     type: annotation
+
+admin:
+    resource: admin.yaml
+    prefix: /admin
+
+api:
+    resource: api.yaml
+
+procesos:
+    resource: procesos.yaml
+    prefix: /procesos
+
+reportes:
+    resource: reportes.yaml
+
+solicitud:
+    resource: solicitud.yaml
+    prefix: /solicitud
+
+validacion:
+    resource: validacion.yaml
+    prefix: /autorizacion
+

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Helpers\IcUpload;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ic_documentos_perfil", indexes={@ORM\Index(name="IDX_AF3ED577B052C3AA", columns={"id_perfil"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcDocumentosPerfilRepository")
  */
-class IcDocumentosPerfil
+class IcDocumentosPerfil extends IcUpload 
 {
     /**
      * @var int

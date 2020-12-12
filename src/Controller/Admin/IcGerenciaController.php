@@ -23,7 +23,7 @@ class IcGerenciaController extends AbstractController
             ->getRepository(IcGerencia::class)
             ->findAll();
 
-        return $this->render('ic_gerencia/index.html.twig', [
+        return $this->render('admin/ic_gerencia/index.html.twig', [
             'ic_gerencias' => $icGerencias,
         ]);
     }
@@ -46,7 +46,7 @@ class IcGerenciaController extends AbstractController
             return $this->redirectToRoute('procesos_gerencia');
         }
 
-        return $this->render('ic_gerencia/new.html.twig', [
+        return $this->render('admin/ic_gerencia/new.html.twig', [
             'ic_gerencium' => $icGerencium,
             'form' => $form->createView(),
         ]);
@@ -57,7 +57,7 @@ class IcGerenciaController extends AbstractController
      */
     public function show(IcGerencia $icGerencium): Response
     {
-        return $this->render('ic_gerencia/show.html.twig', [
+        return $this->render('admin/ic_gerencia/show.html.twig', [
             'ic_gerencium' => $icGerencium,
         ]);
     }
@@ -77,7 +77,7 @@ class IcGerenciaController extends AbstractController
             return $this->redirectToRoute('procesos_gerencia');
         }
 
-        return $this->render('ic_gerencia/edit.html.twig', [
+        return $this->render('admin/ic_gerencia/edit.html.twig', [
             'ic_gerencium' => $icGerencium,
             'form' => $form->createView(),
         ]);

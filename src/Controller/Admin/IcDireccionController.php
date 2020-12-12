@@ -19,7 +19,7 @@ class IcDireccionController extends AbstractController
             ->getRepository(IcDireccion::class)
             ->findAll();
 
-        return $this->render('ic_direccion/index.html.twig', [
+        return $this->render('admin/ic_direccion/index.html.twig', [
             'ic_direccions' => $icDireccions,
         ]);
     }
@@ -40,7 +40,7 @@ class IcDireccionController extends AbstractController
             return $this->redirectToRoute('ic_direccion_index');
         }
 
-        return $this->render('ic_direccion/new.html.twig', [
+        return $this->render('admin/ic_direccion/new.html.twig', [
             'ic_direccion' => $icDireccion,
             'form' => $form->createView(),
         ]);
@@ -59,7 +59,7 @@ class IcDireccionController extends AbstractController
             return $this->redirectToRoute('ic_direccion_index');
         }
 
-        return $this->render('ic_direccion/edit.html.twig', [
+        return $this->render('admin/ic_direccion/edit.html.twig', [
             'ic_direccion' => $icDireccion,
             'form' => $form->createView(),
         ]);
@@ -74,6 +74,6 @@ class IcDireccionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('ic_direccion_index');
+        return $this->redirectToRoute('admin/ic_direccion_index');
     }
 }

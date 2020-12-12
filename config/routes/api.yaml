@@ -2,19 +2,34 @@
 # Api
 #
 
-api_solicitud_tipo:
-  path: /tipo-de-solicitud
-  defaults: { _controller: AppBundle:IcApi:getTipoSolicitud }
+api_solicitud_egreso:
+    path: /api/solicitud-egreso
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::getApi
 
-api_solicitud_listas:
-  path: /lista-de-torneo-categoria-jornada-direccion-co-cc
-  defaults: { _controller: AppBundle:IcApi:getListas }
+json_area:
+    path: /json-area
+    controller: App\Controller\Procesos\IcActivosFijosController::getArea
 
-api_solicitud_cuenta_contable:
-  path: /cuenta-contable-de-gastos
-  defaults: { _controller: AppBundle:IcApi:getCuentasContables }
+activos_fijos_index:
+    path: /mis-herramientas-de-trajo
+    controller: App\Controller\Procesos\IcActivosFijosController::index
 
-api_torneo_categoria_jornadas:
-  path: /lista-de-torneo-categoria-jornada
-  defaults: { _controller: AppBundle:IcApi:getTorneo }
+activos-fijos:
+    path: /activos
+    controller: App\Controller\Procesos\IcActivosFijosController::getActivos
 
+activos-fijose:
+    path: /salida-activo-fijo/{activo}
+    controller: App\Controller\Procesos\IcActivosFijosController::getSalida
+
+activos_autorizacion:
+    path: /salida-activo-fijo/{codigo}/verificacion/{correo}
+    controller: App\Controller\Procesos\IcActivosFijosController::getAutorizacion
+
+activos_solicitues:
+    path: /solicitudes-salia
+    controller: App\Controller\Procesos\IcActivosFijosController::getSolicitudes
+
+activos_salida_fecha:
+    path: /fecha-salida-activos-fijos
+    controller: App\Controller\Procesos\IcActivosFijosController::getSalidaFecha

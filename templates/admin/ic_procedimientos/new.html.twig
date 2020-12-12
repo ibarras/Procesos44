@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
             <div class="card-header">
                 <h1>Nuevo Procedimiento</h1>
             </div>
-            <div class="card-body">
+            <div class="card-body" id="edditor">
                 {{ include('admin/ic_procedimientos/_form.html.twig') }}
             </div>
             <div class="card-footer">
@@ -19,5 +19,21 @@
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+{{ parent() }}
+
+    <script>
+        CKEDITOR.replace('ic_procedimientos_descripcion', {
+            filebrowserUploadUrl: "{{ path('procesos_upload_file') }}",
+            height: 260,
+            width: 700,
+        });
+
+    </script>
+
 
 {% endblock %}

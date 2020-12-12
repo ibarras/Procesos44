@@ -2,70 +2,60 @@
 #Rutas general del sistemas de procesos, no admin , no solicitudes
 procesos_inicio:
   path: /
-  defaults: { _controller: AppBundle:Default:index }
+  controller: App\Controller\Procesos\IcHomeController::index
 
 procesos_documentacion_egresos:
   path: /{id}/procedimiento/{nombre}
-  defaults: { _controller: AppBundle:Default:egresos }
+  controller: App\Controller\Procesos\IcHomeController::egresos
   requirements:
     id: '\d+'
 
 
 procesos_tipo_control:
   path: /{idMacroproceso}/control/{nombre}
-  defaults: { _controller: AppBundle:Default:tipo }
+  controller: App\Controller\Procesos\IcHomeController::tipo
   requirements:
     idMacroproceso: '\d+'
 
 procesos_menu_procedimiento:
-  path: /{idProcedimiento}/menu-de-procedimientos.html
-  defaults: { _controller: AppBundle:Default:menuprocedimiento}
+  path: /{idProcedimiento}/menu-de-procedimientos
+  controller: App\Controller\Procesos\IcHomeController::menuprocedimiento
   requirements:
     idProcedimiento: '\d+'
 
+
+#
+# procedimientos
+#
+
 public_procedimiento_procedimiento:
-  path: /{id}/{nombre}/mostrar-procedimientos.html
-  defaults: { _controller: AppBundle:IcProcedimientos:procedimiento }
+  path: /{id}/{nombre}/mostrar-procedimientos
+  controller: App\Controller\Procesos\IcProcedimientosController::procedimiento 
   requirements:
     id: '\d+'
 
 public_procedimiento_instruccion_trabajo:
-  path: /{instruccion}/mostrar-instruccion-trabajo.html
-  defaults: { _controller: AppBundle:IcProcedimientos:instruccion }
+  path: /{instruccion}/mostrar-instruccion-trabajo
+  controller: App\Controller\Procesos\IcProcedimientosController::instruccion
   requirements:
     instruccion: '\d+'
 
 #
-# Solicitud de Egreso
+# instruccion de trabajo
 #
 
-solicitud_egresos_usuario:
-  path: /solicitud-de-egreso-por-usuario
-  defaults: { _controller: AppBundle:IcSolicitud:index }
-
+public_instruccion_mostrar:
+  path: /{idInstructivo}/club-tijuana-mostrar-instruccion-de-trabajo
+  controller: App\Controller\Procesos\IcInstruccionTrabajoController::show
+  requirements:
+    idInstructivo: '\d+'
 
 #
-# Solicitud de Personal
+# instructivo
 #
 
-procesos_personal:
-  path: /recursos-humanos
-  defaults: { _controller: ProcesosBundle:IcSolicitudPersonal:index }
-
-procesos_personal_lista_gerencia:
-  path: /lista-de-personal-por-gerencia/{idGerencia}
-  defaults: { _controller: ProcesosBundle:IcSolicitudPersonal:listaPorGerencia }
+public_instructivo_mostrar:
+  path: /{iDescripcion}/club-tijuana-mostrar-instructivo-descripcion
+  controller: App\Controller\Procesos\IcInstructivoController::show 
   requirements:
-    idGerencia: '\d+'
-
-procesos_alta_personal:
-  path: /nueva-solicitud-personal/{idArea}
-  defaults: { _controller: ProcesosBundle:IcSolicitudPersonal:new }
-  requirements:
-    idArea: '\d+'
-
-procesos_baja_personal:
-  path: /baja-solicitud-personal/{idArea}
-  defaults: { _controller: ProcesosBundle:IcSolicitudPersonal:baja }
-  requirements:
-    idArea: '\d+'
+    iDescripcion: '\d+'

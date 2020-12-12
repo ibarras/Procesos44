@@ -19,7 +19,7 @@ class IcCategoriaController extends AbstractController
             ->getRepository(IcCategoria::class)
             ->findBy(array(), array('idCategoria' => 'DESC' ));
 
-        return $this->render('ic_categoria/index.html.twig', [
+        return $this->render('admin/ic_categoria/index.html.twig', [
             'ic_categorias' => $icCategorias,
         ]);
     }
@@ -38,7 +38,7 @@ class IcCategoriaController extends AbstractController
             return $this->redirectToRoute('procesos_categoria');
         }
 
-        return $this->render('ic_categoria/new.html.twig', [
+        return $this->render('admin/ic_categoria/new.html.twig', [
             'ic_categorium' => $categoria,
             'form' => $form->createView(),
         ]);
@@ -47,7 +47,7 @@ class IcCategoriaController extends AbstractController
 
     public function show(IcCategoria $categoria): Response
     {
-        return $this->render('ic_categoria/show.html.twig', [
+        return $this->render('admin/ic_categoria/show.html.twig', [
             'ic_categorium' => $categoria,
         ]);
     }
@@ -65,7 +65,7 @@ class IcCategoriaController extends AbstractController
             return $this->redirectToRoute('procesos_categoria');
         }
 
-        return $this->render('ic_categoria/edit.html.twig', [
+        return $this->render('admin/ic_categoria/edit.html.twig', [
             'ic_categorium' => $categoria,
             'form' => $form->createView(),
         ]);

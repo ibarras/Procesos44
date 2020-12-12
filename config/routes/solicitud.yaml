@@ -4,55 +4,55 @@
 
 solicitud_egresos_usuario_index:
     path: /mis-solicitudes-de-egresos
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:index }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::index
 
 solicitud_egreso_usuario_show:
     path: /{id}/solicitud-de-egreso
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:show }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::show
 
 solicitud_egreso_usuario_template:
     path: /{id}/solicitud/template-de-egreso-template
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:template }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::template
 
 solicitud_egresos:
     path: /mostrar-solicitudes-de-egresos
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickEgresosLista }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::getSolicitudesPorUsuario
 
 solicitud_egresos_agregar:
     path: /nueva-solicitud-de-egresos
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickAEgresoAgregar }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::onClickAEgresoAgregar
 
 solicitud_egresos_mostrar:
     path: /mostrar-solicitud-egresos/{id}
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickEgresoMostrar }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::getSolicitud
     requirements:
         id: '\d+'
 
 solicitud_egresos_descripcion_agregar:
     path: /nuevo-registro-egreso-descripcion
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickAgregarDescripcion }
-
-solicitud_deposito_agregar:
-    path: /nuevo-depositio-a-solicitud
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickAgregarDeposito }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::onClickAgregarDescripcion
 
 api_solicitud_descripcion_eliminar:
     path: /eliminar-descripcion-solicitud/{id}
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickDeleteDescripcion }
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::onClickDeleteDescripcion
     requirements:
         id: '\d+'
 
-api_solicitud_descripcion_deposito_eliminar:
-    path: /eliminar-deposito-de-la-descripcion-solicitud/{id}
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickDeleteDeposito }
-    requirements:
-        id: '\d+'
+solicitud_deposito_agregar:
+    path: /nuevo-depositio-a-solicitud
+    controller: App\Controller\Procesos\IcSolicitudEgresoController::onClickAgregarDeposito
 
-solicitud_descripcion_deposito_eliminar:
-    path: /eliminar-la-solicitud/{id}
-    defaults: { _controller: AppBundle:IcSolicitudEgreso:onClickDeleteSolicitud }
-    requirements:
-        id: '\d+'
+# api_solicitud_descripcion_deposito_eliminar:
+#     path: /eliminar-deposito-de-la-descripcion-solicitud/{id}
+#     controller: App\Controller\Procesos\IcSolicitudEgresoController::onClickDeleteDeposito
+#     requirements:
+#         id: '\d+'
+#
+# solicitud_descripcion_deposito_eliminar:
+#     path: /eliminar-la-solicitud/{id}
+#     controller: App\Controller\Procesos\IcSolicitudEgresoController::onClickDeleteSolicitud }
+#     requirements:
+#         id: '\d+'
 
 
 #procesos_solicitud_ausencia:

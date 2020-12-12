@@ -1,0 +1,11 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}New IcDocumentosPerfil{% endblock %}
+
+{% block body %}
+    <h1>Create new IcDocumentosPerfil</h1>
+
+    {{ include('ic_documentos_perfil/_form.html.twig') }}
+
+    <a href="{{ path('ic_documentos_perfil_index') }}">back to list</a>
+{% endblock %}

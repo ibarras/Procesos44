@@ -1,0 +1,133 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+    <style>
+        h4{
+            text-align: center;
+        }
+        .texto td{
+            font-size: 12px;
+        }
+    </style>
+
+        <div class="row" id="index-solicitud-egreso">
+            <div clas="col-sm-12">
+                <h3><strong>SOLICITUDES DE EGRESOS</strong></h3>
+
+                <table class="table">
+
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Solicitud</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Area Solicitante</th>
+                        <th scope="col">Torneo</th>
+                        <th scope="col">Categoria</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="texto" v-for="item in SolicitudList" >
+
+                            <td >@{ item.Id } , @{ item.TipoSolicitud }</td>
+                            <th scope="row">@{ item.Fecha } </th>
+                            <td>@{ item.Perfil }</td>
+                            <td>@{ item.Torneo }</td>
+                            <td>@{ item.Categoria }</td>
+
+                    <td>
+                        <a v-on:click="onClickShowSolicitud(item.Id)"  class="btn btn-success btn-sm " role="button">MOSTRAR</a>
+                        <a v-on:click="onClickShowTemplate(item.Id)"  class="btn btn-secondary btn-sm" role="button">APROBACION</a>
+
+                        <a v-on:click="onClickDeleteSolicitud(item.Id)" class="btn btn-danger btn-sm"   >ELIMINAR</a>
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+
+
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        new Vue({
+            delimiters: ['@{', '}'],
+            el: '#index-solicitud-egreso',
+
+            created: function () {
+                this.onClickShowSolicitudEgresos();
+            },
+
+            data: {
+
+                SolicitudList: [],
+
+                solicitud: null,
+                fecha: null,
+                solicitante: null,
+                torneo: null,
+                categoria: null,
+                numero: null,
+
+            },
+            mounted() {},
+            watched: {},
+            computed: {},
+
+            methods: {
+                onClickShowSolicitud: function (solicitud){
+                    console.log(solicitud);
+                    window.location.href = solicitud + '/solicitud-de-egreso';
+                },
+
+                onClickShowTemplate: function (solicitud){
+                    console.log(solicitud);
+                    window.location.href = solicitud + '/solicitud/template-de-egreso-template';
+                },
+                onClickDeleteSolicitud: function (solicitud ) {
+
+                    if (confirm("AL ELIMINAR LA SOLICITUD SE ELIMINARA TODA LA INFORAMCION CONTENIDDA")) {
+
+                        let url = '/eliminar-la-solicitud/' + solicitud;
+                        axios.delete(url).then(response => {
+                            this.onClickShowSolicitudEgresos();
+                        }).catch(error => {
+                            this.errors = 'Erro al obtener la inforamacion de las solicitudes';
+                            console.log(error);
+                        });
+                    }
+                },
+
+                onClickShowSolicitudEgresos: function () {
+
+                    let url = '/mostrar-solicitudes-de-egresos';
+
+                    axios.get(url).then(response => {
+                        this.SolicitudList = response.data;
+
+                    }).catch(error => {
+                        this.errors = 'Erro al obtener la inforamacion de las solicitudes';
+                        console.log(error);
+                    });
+
+                },
+
+            }, //fin de methods
+
+        })
+        ;
+
+
+    </script>
+
+{% endblock %}
+

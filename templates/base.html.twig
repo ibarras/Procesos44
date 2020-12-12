@@ -54,121 +54,11 @@
 </head>
 <body>
 
-<nav class="navbar navbar-dark  bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Club Tijuana </a>
-</nav>
+
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('procesos_inicio') }}">
-                            <span data-feather="home"></span>
-                            Procesos <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" >
-                        <a data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-link" >
-                            <span data-feather="layers"></span>SOLICITUDES ABIERTAS</a>
-                    </li>
-
-                    <div  bg-dark id="collapsibleNavbar">
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('solicitud_egresos_agregar') }}">
-                                    <span data-feather="file-plus"></span>
-                                    + SOLICITUD
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('solicitud_egresos_usuario_index') }}">
-                                    <span data-feather="file-plus"></span>
-                                    -  EGRESOS
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('solicitud_egresos_usuario_index') }}">
-                                    <span data-feather="file-plus"></span>
-                                    -  REPORTES
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </ul>
-
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Configuracion</span>
-                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Configuracion">
-                        <span data-feather="plus-circle"></span>
-                    </a>
-                </h6>
-
-                <ul class="nav flex-column mb-2">
-
-
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_macroprocesos') }}">
-                            <span data-feather="file-text"></span>Macroprocesos</a>
-                    </li>
-
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_usuarios') }}">#}
-                    {#                            <span data-feather="file-text"></span>Usuarios</a>#}
-                    {#                    </li>#}
-
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_perfil') }}">#}
-                    {#                            <span data-feather="file-text"></span>Perfil</a>#}
-                    {#                    </li>#}
-
-
-                    {#                    <li class="nav-item"><a  class="nav-link" href="{{ path('procesos_centro') }}">#}
-                    {#                            <span data-feather="file-text"></span>Centro de Costo</a>#}
-                    {#                    </li>#}
-
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_direccion') }}">#}
-                    {#                            <span data-feather="file-text"></span>Direccion</a>#}
-                    {#                    </li>#}
-
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_gerencia') }}">#}
-                    {#                            <span data-feather="file-text"></span>Gerencia</a></li>#}
-
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_area') }}">#}
-                    {#                            <span data-feather="file-text">Area</span>Area</a>#}
-                    {#                    </li>#}
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_puesto') }}">#}
-                    {#                           <span data-feather="file-text">Puesto</span>Puesto</a>#}
-                    {#                    </li>#}
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_categoria') }}">#}
-                    {#                          <span data-feather="file-text">Categoria</span>Categoria</a>#}
-                    {#                    </li>#}
-
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_categoria_usuario') }}">#}
-                    {#                            <span data-feather="file-text">Categoria-Usuario</span>Categoria/Usuario</a>#}
-                    {#                    </li>#}
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_subcategoria_usuario') }}">#}
-                    {#                            <span data-feather="file-text">SubCategoria</span>SubCategoria</a>#}
-                    {#                    </li>#}
-                    {#                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_direccion') }}">#}
-                    {#                            <span data-feather="file-text"></span>SubCat/Usuario</a>#}
-                    {#                    </li>#}
-
-                </ul>
-            </div>
-        </nav>
-
         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
-            <div class="row">
-                <div class="col-12">
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-
             <div class="container">
                 {% block content %}
                 {% endblock %}
@@ -195,7 +85,7 @@
     <!-- AXIOS core JavaScript -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuejs-dialog@1.4.2/dist/vuejs-dialog.min.js" ></script>
-
+    <script src="https://cdn.ckeditor.com/4.15.0/standard-all/ckeditor.js"></script>
 
 
 {% endblock %}

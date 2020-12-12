@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Procedimiento: <strong>{{ procedimiento.title }}</strong> Del Proceso: <strong>{{ procedimiento.IdProcesos.title }}</strong></h4>
+                </div>
+                <div class="card-body">
+                    {{ procedimiento.descripcion | raw }}
+                    <div class="card-footer">
+
+                        {% if instruccion is not empty %}
+
+                            <a  class="btn btn-primary btn-md" 
+                                href="{{ path('public_procedimiento_instruccion_trabajo', {'instruccion': instruccion.id }) }}">
+                                Ver Instruccion de Trabajo
+                             </a>
+
+                        {% endif %}
+
+                            <a class="btn btn-primary btn-mdd" 
+                                href="{{ app.request.headers.get('referer') }}">
+                                Regresar
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+{% endblock %}

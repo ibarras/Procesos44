@@ -7,8 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * IcSolicitudDescripcionDeposito
  *
- * @ORM\Table(name="ic_solicitud_descripcion_deposito", indexes={@ORM\Index(name="IDX_D484A48569D7761A", columns={"id_solicitud_descripcion"}), @ORM\Index(name="IDX_D484A485CB870C58", columns={"id_perfil_solicita"}), @ORM\Index(name="IDX_D484A485205491AC", columns={"id_perfil_autoriza"})})
+ * @ORM\Table(name="ic_solicitud_descripcion_deposito", indexes={@ORM\Index(name="IDX_D484A48569D7761A", columns={"id_solicitud_descripcion"})})
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcSolicitudDescripcionDepositoRepository")
+
  */
 class IcSolicitudDescripcionDeposito
 {
@@ -72,13 +74,6 @@ class IcSolicitudDescripcionDeposito
     private $esActivo = false;
 
     /**
-     * @var int|null
-     *
-     * @ORM\Column(name="id_solicitud", type="integer", nullable=true)
-     */
-    private $idSolicitud;
-
-    /**
      * @var \IcSolicitudDescripcion
      *
      * @ORM\ManyToOne(targetEntity="IcSolicitudDescripcion")
@@ -88,25 +83,7 @@ class IcSolicitudDescripcionDeposito
      */
     private $idSolicitudDescripcion;
 
-    /**
-     * @var \IcFosPerfil
-     *
-     * @ORM\ManyToOne(targetEntity="IcFosPerfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_perfil_solicita", referencedColumnName="id_perfil")
-     * })
-     */
-    private $idPerfilSolicita;
 
-    /**
-     * @var \IcFosPerfil
-     *
-     * @ORM\ManyToOne(targetEntity="IcFosPerfil")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_perfil_autoriza", referencedColumnName="id_perfil")
-     * })
-     */
-    private $idPerfilAutoriza;
 
     public function getId(): ?int
     {
@@ -197,18 +174,6 @@ class IcSolicitudDescripcionDeposito
         return $this;
     }
 
-    public function getIdSolicitud(): ?int
-    {
-        return $this->idSolicitud;
-    }
-
-    public function setIdSolicitud(?int $idSolicitud): self
-    {
-        $this->idSolicitud = $idSolicitud;
-
-        return $this;
-    }
-
     public function getIdSolicitudDescripcion(): ?IcSolicitudDescripcion
     {
         return $this->idSolicitudDescripcion;
@@ -217,30 +182,6 @@ class IcSolicitudDescripcionDeposito
     public function setIdSolicitudDescripcion(?IcSolicitudDescripcion $idSolicitudDescripcion): self
     {
         $this->idSolicitudDescripcion = $idSolicitudDescripcion;
-
-        return $this;
-    }
-
-    public function getIdPerfilSolicita(): ?IcFosPerfil
-    {
-        return $this->idPerfilSolicita;
-    }
-
-    public function setIdPerfilSolicita(?IcFosPerfil $idPerfilSolicita): self
-    {
-        $this->idPerfilSolicita = $idPerfilSolicita;
-
-        return $this;
-    }
-
-    public function getIdPerfilAutoriza(): ?IcFosPerfil
-    {
-        return $this->idPerfilAutoriza;
-    }
-
-    public function setIdPerfilAutoriza(?IcFosPerfil $idPerfilAutoriza): self
-    {
-        $this->idPerfilAutoriza = $idPerfilAutoriza;
 
         return $this;
     }

@@ -1,0 +1,6 @@
+oauth_facebook:
+  path: /connect/facebook
+  controller: App\Controller\Admin\SecurityController:facebookConnect
+oauth_facebook_check:
+  path: /connect/facebook/check
+  controller: App\Controller\Admin\SecurityController:facebookConnectionCheck

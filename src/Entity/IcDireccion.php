@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="ic_direccion")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\IcDireccionRepository")
  */
 class IcDireccion
 {

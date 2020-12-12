@@ -1,0 +1,125 @@
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+
+<div id="solicitud-egreso-gasto-reembolso">
+
+        <div class="row solicitud">
+            <div class="col-md-6">
+                <p> Solicitante: </p> {{ solicitud.idPerfilSolicita }}
+            </div>
+            <div class="col-md-6">
+                <p>
+                    Autorizado:</p> {% if solicitud.idPerfilAutoriza is empty %} Pendiente de Autorizacion {% else %} {{ solicitud.idPerfilAutoriza }} {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 solicitud">
+                <p>Solicitud: </p> {{ solicitud.idTipoSolicitud }}
+            </div>
+            <div class="col-md-6 solicitud">
+                <p>Estatus: </p>{{ solicitud.esActivo }}
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col-md-6">
+                <p>Creado:</p> {{ solicitud.fecha |date('d-m-Y') }}
+            </div>
+            <div class="col-md-6">
+                <p>Fecha de Transferencia:</p> {{ solicitud.fechaTransferencia | date('d-m-Y') }}
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col-md-6">
+                <p>Importe: </p>{{ solicitud.importe }}
+            </div>
+            <div class="col-md-6">
+                <p>No Tarjeta</p> {{ solicitud.numeroTarjeta }}
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col-md-6">
+                <p> Direccion: </p>{{ solicitud.idDireccion }}
+            </div>
+            <div class="col-md-6">
+                <p>Centro de Costo:</p> {{ solicitud.idCentroOrganizativo }}
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col-md-6">
+                <p>Torneo: </p>{{ solicitud.idTorneo |upper }}
+            </div>
+            <div class="col-md-6">
+                <p>Categoria: </p>{{ solicitud.idTorneoCategoria |upper }} <p>
+                    Jornada: </p> {{ solicitud.idJornada|upper }}
+            </div>
+        </div>
+
+        <div class="row solicitud">
+            <div class="col-md-12">
+                <p>Motivo:</p> {{ solicitud.motivoDeGasto }}
+            </div>
+        </div>
+
+
+        <div>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">Concepto (Cta Contable)</th>
+                    <th scope="col">Tipo de Gasto</th>
+                    <th scope="col">Presupuesto</th>
+                    <th scope="col">Precio Real</th>
+                    <th scope="col">Variacion</th>
+                    <th scope="col">Autoriza</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for item in descripcion %}
+                <tr>
+{#                    <td>{{ item.cuenta }} </td>#}
+                    <td>{{ item.facturado }}</td>
+                    <td>{{ item.presupuesto }}</td>
+                    <td>{{ item.real }}</td>
+                    <td>{{ item.variacion }}</td>
+{#                    <td>{{ item.autoriza }}</td>#}
+                    <td >Sin autorizacion</td>
+                </tr>
+
+                {% endfor %}
+
+
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>Total Presupuesto: {{ totales.presupuesto }}</td>
+                    <td>Precio Real: {{ totales.real }}</td>
+                    <td>Variacion {{ totales.variacion }}</td>
+
+                    <td>-</td>
+                </tr>
+
+                <thead class="thead-light">
+                <tr>
+                    <th>Importe de Depositado: {{ importe }} </th>
+                    <th>Importe - Precio Real: {{ saldo }} </th>
+                    <th>Retirar Saldo Restante: {{ retirar }} </th>
+
+                    <th>-</th>
+                    <th>-</th>
+                    <th>-</th>
+                </tr>
+                </thead>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+

@@ -31,34 +31,36 @@ class IcCuentaContableRepository extends ServiceEntityRepository
 
     public function transformAll()
     {
-        $cuentaContable = $this->findAll();
-        $cuentaContableArray = [];
+        $object = $this->findAll();
 
-        foreach ($cuentaContable as $cc) {
-            $cuentaContableArray[] = $this->transform($cc);
+        $allArray = [];
+
+        foreach ($object as $o) {
+            $allArray[] = $this->transform($o);
         }
 
-        return $cuentaContableArray;
+        return $allArray;
     }
 
-
-    /**
-     * Metodo para obtener Actual
-     *
-     */
-    public function getTecnicoActivo()
+    public function getCuentaContable($direccion)
     {
+
         $em = $this->getEntityManager();
+        $query =  "
+       select  distinct(ccon.nombre) as nombre, cc.nombre as centro, ccon.id as id
+       from App\Entity\IcFosPerfil  p
+       
+        inner join App\Entity\IcCentroOrganizativoDireccion  co 
+                    WITH  p.idDireccion = co.idDireccion
+        inner join App\Entity\IcCentroCosto cc 
+                    WITH co.id = cc.idCentroOrganizativo
+        inner join App\Entity\IcCuentaContable ccon 
+                    WITH cc.id = ccon.idCentroCosto
+                    
+        where p.idDireccion = " . $direccion;
 
-        $query = $em->createQuery('
-				SELECT ct FROM FrontendBundle:IcCuerpoTecnico ct
-				WHERE ct.esActivo = true
-				AND   ct.esEntrenador = true
-				');
 
-        return $query->getOneOrNullResult();
+        return $em->createQuery( $query )->getResult();
+
     }
-
-
-
 }

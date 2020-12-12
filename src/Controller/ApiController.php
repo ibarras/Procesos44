@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller;
 
+use App\Helpers\IcUpload;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,9 +44,9 @@ class ApiController
      * @param array $data
      * @param array $headers
      *
-     * @return Symfony\Component\HttpFoundation\JsonResponse
+     *
      */
-    public function response($data, $headers = [])
+    public function responseIc($data, $headers = [])
     {
         return new JsonResponse($data, $this->getStatusCode(), $headers);
     }
@@ -74,7 +76,7 @@ class ApiController
      */
     public function responseUnauthorized($message = 'Not authorized!')
     {
-        return $this->setStatusCode(401)->respondWithErrors($message);
+        return $this->setStatusCode(401)->responseWithErrors($message);
     }
 
     /**
@@ -98,7 +100,7 @@ class ApiController
      */
     public function responseNotFound($message = 'Not found!')
     {
-        return $this->setStatusCode(404)->respondWithErrors($message);
+        return $this->setStatusCode(404)->responseWithErrors($message);
     }
 
     /**
@@ -110,7 +112,8 @@ class ApiController
      */
     public function responseCreated($data = [])
     {
-        return $this->setStatusCode(201)->response($data);
+        return $this->setStatusCode(201)->responseIc($data);
+
     }
 
     protected function transformJsonBody(Request $request)

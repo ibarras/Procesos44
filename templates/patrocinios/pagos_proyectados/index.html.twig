@@ -1,0 +1,58 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12 tablePanel">
+            <div class="card mt-4 my-4 ">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder d-inline-block">Pagos Proyectados</h5>
+                    <a title="Agregar Pago Proyectado" href="{{ path('agregar_pago_proyectado') }}" class="btn btn-sm btn-dark-green m-auto float-right"><i class="fas fa-plus mr-1"></i> Agregar</a>
+                    {% if pagosProyectados %}
+                        <table id="pagosProyectados" class="table">
+                            <thead>
+                            <tr>
+                                <th class="table-title">Patrocinador</th>
+                                <th class="table-title">Fecha de Pago Proyectado</th>
+                                <th class="table-title">Fecha Limite de Pago</th>
+                                <th class="table-title">Monto</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for pagoProyectado in pagosProyectados %}
+                                <tr>
+                                    <th>{{ pagoProyectado.idPatrocinador.nombreComercial }}</th>
+                                    <th>{{ pagoProyectado.fechaPagoProyectado|date('d, M Y') }}</th>
+                                    <th>{{ pagoProyectado.fechaLimitePago|date('d, M Y') }}</th>
+                                    <th>{{ pagoProyectado.monto | number_format(2, '.', ',') }}</th>
+                                    <th>
+                                        <a title="Editar Pago Proyectado" href="{{ path('editar_pago_proyectado', { 'id': pagoProyectado.id }) }}" class="btn btn-sm btn-yellow px-3"><i class="fas fa-pen"></i></a>
+                                        <a title="Agregar Depósito(pago)" href="{{ path('agregar_deposito', {'id': pagoProyectado.id }) }}" class="btn btn-sm btn-success px-3"><i class="fas fa-money-bill-alt"></i></a>
+                                        <a title="Ver depósitos" href="{{ path('depositos_pago_proyectado', {'id': pagoProyectado.id }) }}" class="btn btn-sm btn-primary px-3"><i class="far fa-eye"></i></a>
+                                    </th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <h4 class="mt-4 text-center">Sin Pagos Proyectados Registrados</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            $('#pagosProyectados').DataTable({
+                "language": {
+                    //Archivo json de traduccion
+                    url: '//cdn.datatables.net/plug-ins/1.10.22/i18n/Spanish.json'
+                }
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+{% endblock %}

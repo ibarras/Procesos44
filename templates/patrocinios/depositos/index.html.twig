@@ -1,0 +1,326 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div id="app" class="row bg-white">
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
+            <a href="/patrocinadores">
+                <div class="card card-counter primary-color text-white">
+                    <div class="card-body">
+                        <i class="fa fa-users"></i>
+                        <span class="count-numbers">{! patrocinadores[1] !}</span>
+                        <span class="count-name">Patrocinadores</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
+            <div class="card card-counter teal text-white">
+                <div class="card-body">
+                    <i class="fa fa-chart-line"></i>
+                    <span class="count-numbers">${! totalProyectado | currencydecimal !}</span>
+                    <span class="count-name">Total Proyectado</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
+            <div class="card card-counter success-color-dark text-white">
+                <div class="card-body">
+                    <i class="fa fa-dollar-sign"></i>
+                    <span class="count-numbers">${! totalIngresado | currencydecimal !}</span>
+                    <span class="count-name">Total Ingresado</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-2">
+            <h4>Filtrar por:</h4>
+            <div class="button-group d-inline-flex">
+                <h5 class="h5-responsive p-2">Mes: </h5>
+                <select class="browser-default custom-select" id="selectMes" v-model="mes" required>
+                    <option selected>selecciona una opción</option>
+                    <option v-for="mes in meses" :value="mes.key">{! mes.name !}</option>
+                </select>
+            </div>
+            <div class="button-group d-inline-flex">
+                <h5 class="h5-responsive p-2">Año:</h5>
+                <select class="browser-default custom-select" id="selectAnio" v-model="anio" required>
+                    <option v-for="anio in loadYear" :value="anio.name">{! anio.name !}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="card card-list">
+                <div class="card-header white d-flex justify-content-between align-items-center py-3">
+                    <p class="h5-responsive font-weight-bold mb-0">Pagos Proyectados</p>
+                </div>
+                <div class="card-body">
+                    <h4 v-if="errorProyectados" >Sin pagos proyectados.</h4>
+                    <table v-else class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Patrocinador</th>
+                            <th scope="col">Fecha de pago proyectado</th>
+                            <th scope="col">Fecha limite de pago</th>
+                            <th scope="col">Monto($)</th>
+                            <th scope="col">Depositos</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="p in PagosProyectadosList">
+                            <th scope="row"><a class="text-dark">{! p.id_patrocinador !}</a></th>
+                            <th scope="row"><a class="text-dark">{! p.fecha_proyectado !}</a></th>
+                            <th scope="row"><a class="text-dark">{! p.fecha_limite !}</a></th>
+                            <th scope="row"><a class="text-dark">{! p.monto | currencydecimal !}</a></th>
+                            <th scope="row"><button class="btn btn-sm btn-outline-dark" @click="getDepositos(p.id)" :value="p.id" data-toggle="modal" data-target="#depositosModal">Ver</button></th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Depositos -->
+        <div class="modal fade" id="depositosModal" tabindex="-1" role="dialog" aria-labelledby="depositosModal"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="depositosModal">Depositos</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">
+                            <h4 v-if="errorDepositos">Sin depositos.</h4>
+                            <table v-else class="table table-sm">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Monto</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="d in listaDepositos">
+                                    <th scope="row">{! d.id !}</th>
+                                    <td>{! d.fecha !}</td>
+                                    <td>{! d.monto | currencydecimal !}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var currentDate = new Date()
+        new Vue({
+            el: '#app',
+            delimiters: ['{!' ,'!}'],
+            data: {
+                PagosProyectadosList: [],
+                mes: currentDate.getMonth(),
+                anios: [],
+                anio: currentDate.getFullYear(),
+                meses: [
+                    {
+                        'key' : 0,
+                        'name': 'Enero',
+                    },
+                    {
+                        'key' : 1,
+                        'name': 'Febrero',
+                    },
+                    {
+                        'key' : 2,
+                        'name': 'Marzo',
+                    },
+                    {
+                        'key' : 3,
+                        'name': 'Abril',
+                    },
+                    {
+                        'key' : 4,
+                        'name': 'Mayo',
+                    },
+                    {
+                        'key' : 5,
+                        'name': 'Junio',
+                    },
+                    {
+                        'key' : 6,
+                        'name': 'Julio',
+                    },
+                    {
+                        'key' : 7,
+                        'name': 'Agosto',
+                    },
+                    {
+                        'key' : 8,
+                        'name': 'Septiembre',
+                    },
+                    {
+                        'key' : 9,
+                        'name': 'Octubre',
+                    },
+                    {
+                        'key' : 10,
+                        'name': 'Noviembre',
+                    },
+                    {
+                        'key' : 11,
+                        'name': 'Diciembre',
+                    },
+                ],
+                initialDate: null,
+                finalDate: null,
+                minYear: currentDate.getFullYear() -6,
+                maxYear: currentDate.getFullYear(),
+                totalProyectado: null,
+                totalIngresado: 0,
+                patrocinadores: '',
+                idPago: null,
+                listaDepositos: [],
+                errorDepositos: false,
+                errorProyectados: false,
+                polling: null,
+            },
+            created: function () {
+                this.getCountPatrocinadores();
+                this.getPagosProyectados();
+                this.sumTotalProyectado();
+            },
+            filters: {
+                currencydecimal (value) {
+                    return value.toLocaleString('es-MX')
+                }
+            },
+            methods: {
+                moment: (date) => {
+                    return moment(date)
+                },
+                setParameters: (month, year, locale) => {
+                    const initialDate = new Date(year, month, 1)
+                    const finalDate = new Date(year, month + 1, 0)
+                    return {
+                        initial: initialDate,
+                        final: finalDate
+                    }
+                },
+                getCountPatrocinadores: function () {
+                    let url = '/count-patrocinadores';
+
+                    axios.get(url).then((response) => {
+                        this.patrocinadores = response.data
+                        //console.log(response.data);
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                },
+                getPagosProyectados: function () {
+                    let url = '/proyectados';
+
+                    axios.get(url).then((response) => {
+                        this.PagosProyectadosList = response.data.proyectados;
+                        this.totalIngresado = response.data.total_ingresado;
+                        //console.log(response.data);
+                    }).catch(error => {
+                        console.log(error);
+                        this.totalIngresado = 0;
+                    })
+                },
+                sumTotalProyectado: function(){
+                    if (this.PagosProyectadosList.length >= 1) {
+                        let total = this.PagosProyectadosList.reduce((sum, pago) => (typeof  pago.monto == 'number' ? sum + pago.monto : sum), 0);
+                        this.totalProyectado = total
+                    }
+                    else{
+                        this.totalProyectado = 0;
+                    }
+                },
+                onChangePagosProyectadosMes: function () {
+                    const params = {
+                        iDate: this.initialDate,
+                        fDate: this.finalDate,
+                    };
+                    let url = '/proyectados';
+
+                    this.errorProyectados = false;
+
+                    axios.post(url, params).then(response => {
+                        this.PagosProyectadosList = response.data.proyectados;
+                        this.totalIngresado = response.data.total_ingresado;
+                    }).catch(error => {
+                        if (error.response.status === 404)
+                        {
+                            console.log(error);
+                            this.errorProyectados = true
+                            this.PagosProyectadosList = []
+                            this.totalIngresado = 0;
+                        }
+
+                    });
+                },
+                getDepositos: function (proyectado_id) {
+                    this.idPago = proyectado_id;
+
+                    let url = '/depositos-pago'
+
+                    const params = {
+                        Pago: this.idPago
+                    }
+
+                    this.errorDepositos = false;
+
+                    axios.post(url, params).then((response) => {
+                        //console.log(response.data)
+                        this.listaDepositos = response.data
+                    }).catch(error => {
+                        if(error.response.status === 404)
+                        {
+                            //console.log(error)
+                            this.errorDepositos = true
+                        }
+                    });
+                },
+            },
+            computed: {
+                loadYear: function () {
+                    let years = []
+                    for (var cont = this.minYear; cont <= this.maxYear; cont++)
+                    {
+                        years.push({name: cont})
+                    }
+                    this.anios = years
+                    return this.anios
+                },
+            },
+            watch:{
+                mes: function () {
+                    const date = this.setParameters(this.mes, this.anio, this.locale)
+                    this.initialDate = moment(date.initial).format('YYYY-MM-DD')
+                    this.finalDate = moment(date.final).format('YYYY-MM-DD')
+
+                    this.onChangePagosProyectadosMes()
+                },
+                anio: function (year) {
+                    const date = this.setParameters(this.mes, this.anio, this.locale)
+                    this.initialDate = moment(date.initial).format('YYYY-MM-DD')
+                    this.finalDate = moment(date.final).format('YYYY-MM-DD')
+
+                    this.onChangePagosProyectadosMes()
+                },
+                PagosProyectadosList: function () {
+                    this.sumTotalProyectado()
+                },
+            },
+        })
+    </script>
+{% endblock %}

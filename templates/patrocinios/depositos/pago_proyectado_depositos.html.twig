@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 mt-4">
+            <div class="card card-list">
+                <div class="row pb-5 p-5">
+                    <div class="col-md-6">
+                        <h4 class="font-weight-bold mb-4">Pago Proyectado</h4>
+                        <h4 class="mb-1">Patrocinador: <strong>{{ pagoProyectado.idPatrocinador.nombreComercial }}</strong></h4>
+                        <h4>Fecha de pago proyectado:  <strong>{{ pagoProyectado.fechaPagoProyectado | date('d, M Y') }}</strong></h4>
+                        <h4 class="mb-1">Fecha limite de pago: <strong>{{ pagoProyectado.fechaLimitePago | date('d, M Y') }}</strong> </h4>
+                        <h4 class="mb-1">Monto: <strong>{{ pagoProyectado.monto | number_format(2, '.', ',') }}</strong> </h4>
+                    </div>
+                </div>
+                <div class="row p-5">
+                    <div class="col-md-12">
+                        <h4 class="font-weight-bold mb-4">Depósitos</h4>
+                        {% if depositos %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+
+                                <th class="border-0 text-uppercase small font-weight-bold">Fecha</th>
+                                <th class="border-0 text-uppercase small font-weight-bold">Monto</th>
+                                <th class="border-0 text-uppercase small font-weight-bold">Comprobante</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for deposito in depositos %}
+                            <tr>
+
+                                <td>{{ deposito.fecha | date('d, M Y') }}</td>
+                                <td>{{ deposito.monto | number_format(2, '.', ',') }}</td>
+                                <td><span data-toggle="modal" data-target="#comprobanteModal" data-comprobante="{{ asset('uploads/imagen/comprobantes/' ~ deposito.comprobante) }}" class="btn btn-sm btn-success px-3"><i class="fas fa-file-invoice-dollar"></i> Comprobante</span></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                            <h4 class="text-primary">Sin depósitos registrados</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="comprobanteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark shadow">
+                    <h5 class="modal-title w-100 font-weight-bold py-2 text-center text-white" id="comprobanteModalLabel">Comprobante de Pago</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="card-img" src="" alt="comprobante de pago">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $('#comprobanteModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        var datos = button.data('comprobante')
+        var modal = $(this)
+        //Modal
+        modal.find('.modal-body img').attr("src", datos)
+        })
+
+    </script>
+{% endblock %}

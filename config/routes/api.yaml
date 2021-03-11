@@ -33,3 +33,17 @@ activos_solicitues:
 activos_salida_fecha:
     path: /fecha-salida-activos-fijos
     controller: App\Controller\Procesos\IcActivosFijosController::getSalidaFecha
+#
+# Api Dashboard Info
+#
+pagos_proyectados_mes:
+    path: /proyectados
+    controller: App\Controller\Patrocinios\IcPagoProyectadoController::getPagosProyectados
+
+count_patrocinadores:
+    path: /count-patrocinadores
+    controller: App\Controller\Patrocinios\IcPatrocinadorController::countPatrocinadores
+
+depositos_pago:
+    path: /depositos-pago
+    controller: App\Controller\Patrocinios\IcPagoController::depositosPorPago

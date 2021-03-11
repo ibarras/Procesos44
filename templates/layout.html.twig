@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <!-- Google Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <!-- Bootstrap core CSS -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
@@ -25,6 +26,8 @@
         <link rel="stylesheet" href="{{ asset('css/mdb.min.css') }}">
         <!-- Your custom styles (optional) -->
         <link rel="stylesheet" href="{{ asset('css/procesos.css') }}">
+        <!-- DataTables mdbootstrap 4-->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap4.min.css">
 
     {% endblock %}
     <!-- Favicons -->
@@ -54,97 +57,134 @@
 </head>
 <body>
 
-
-
 <nav class="navbar navbar-dark  bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Club Tijuana </a>
+    <span class="d-contents font-weight-bolder text-monospace">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Club Tijuana</a>
+    </span>
     <ul class="list-group">
-        <li class="list-group-item"><a href="{{ path('procesos_logout') }}" >Logout</a> </li>
+        <li class="list-group-item">
+            <a href="{{ path('procesos_logout') }}" >
+                <i class="fa fa-door-open p-1"></i>Salir
+            </a>
+        </li>
     </ul>
 </nav>
 
 <div class="container-fluid">
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{{ path('procesos_inicio') }}">
-                            <span data-feather="home"></span>
-                            Procesos <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" >
-                        <a data-toggle="collapse" data-target="#collapsibleNavbar" class="nav-link" >
-                            <span data-feather="layers"></span>SOLICITUDES ABIERTAS</a>
-                    </li>
-
-                    <div  bg-dark id="collapsibleNavbar">
-                        <ul class="nav flex-column">
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('solicitud_egresos_agregar') }}">
-                                    <span data-feather="file-plus"></span>
-                                    + SOLICITUD
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('solicitud_egresos_usuario_index') }}">
-                                    <span data-feather="file-plus"></span>
-                                    -  EGRESOS
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('activos_fijos_index') }}">
-                                    <span data-feather="file-plus"></span>
-                                    Mis Equipos
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </ul>
-
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Configuracion</span>
-                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Configuracion">
-                        <span data-feather="plus-circle"></span>
+            <ul class="nav flex-column">
+                <li class="nav-item pt-2">
+                    <a href="/">
+                        <h4 class="text-dark text-center">Procesos</h4>
                     </a>
-                </h6>
-
-                <ul class="nav flex-column mb-2">
-
-
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_macroprocesos') }}">
-                            <span data-feather="file-text"></span>Macroprocesos</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_usuarios') }}">
-                            <span data-feather="file-text"></span>Usuarios</a>
-                    </li>
-
-                    <li class="nav-item"><a  class="nav-link" href="{{ path('procesos_centro') }}">
-                            <span data-feather="file-text"></span>Centro de Costo</a>
-                    </li>
-
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_direccion') }}">
-                            <span data-feather="file-text"></span>Direccion</a>
-                    </li>
-
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_gerencia') }}">
-                            <span data-feather="file-text"></span>Gerencia</a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_area') }}">
-                            <span data-feather="file-text">Area</span></a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_puesto') }}">
-                           <span data-feather="file-text">Puesto</span></a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ path('procesos_categoria') }}">
-                          <span data-feather="file-text">Categoria</span></a>
-                    </li>
-
-                </ul>
-            </div>
+                </li>
+                {# Solicitudes #}
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" data-toggle="collapse" data-target="#collapsibleSolicitudes">
+                        <i class="fas fa-file-alt p-1"></i>Solicitudes
+                    </a>
+                </li>
+                <div class="collapse" id="collapsibleSolicitudes">
+                    <ul class="sub-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('solicitud_egresos_agregar') }}">
+                                <i class="fa fa-plus p-2"></i>Nueva Solicitud
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('solicitud_egresos_usuario_index') }}">
+                                <i class="fa fa-file-export p-2"></i>Egresos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('activos_fijos_index') }}">
+                                <i class="fa fa-desktop p-2"></i>Mis Equipos
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {# Patrocinadores #}
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" aria-expanded="false" data-toggle="collapse" data-target="#collapsiblePatrocinadores">
+                        <i class="fa fa-hand-holding-usd p-1"></i>Patrocinios
+                    </a>
+                </li>
+                <div class="collapse" id="collapsiblePatrocinadores">
+                    <ul class="sub-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('lista_patrocinadores') }}">
+                                <i class="fa fa-handshake p-2"></i>Patrocinadores
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('lista_pagos_proyectados') }}">
+                                <i class="fas fa-money-check-alt p-2"></i>Pago Proyectado
+                            </a>
+                        </li>
+                        {#<li class="nav-item">
+                            <a class="nav-link" href="{{ path('control_pagos_inicio_usuario_index') }}">
+                                <i class="fa fa-money-bill-alt p-2"></i>Depositos
+                            </a>
+                        </li>#}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('lista_depositos') }}">
+                                <i class="fa fa-tachometer-alt p-2"></i>Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('procesos_macroprocesos') }}">
+                        <i class="material-icons align-bottom pr-1">bubble_chart</i>Macroprocesos
+                    </a>
+                </li>
+                {# Configuracion #}
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" aria-expanded="false" data-toggle="collapse" data-target="#collapsibleConfiguracion">
+                        <i class="material-icons pr-1 align-bottom">settings</i>Configuración
+                    </a>
+                </li>
+                <div class="collapse" id="collapsibleConfiguracion">
+                    <ul class="sub-menu flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_usuarios') }}">
+                                <i class="fa fa-users p-2"></i>Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_centro') }}">
+                                <i class="fa fa-coins p-2"></i>Centro de Costo
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_direccion') }}">
+                                <i class="fa fa-user-tie p-2"></i>Dirección
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_gerencia') }}">
+                                <i class="fa fa-users-cog p-2"></i>Gerencia
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_area') }}">
+                                <i class="fa fa-sitemap p-2"></i>Área
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_puesto') }}">
+                                <i class="fas fa-user-tag p-2"></i>Puesto
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('procesos_categoria') }}">
+                                <i class="material-icons align-bottom p-1">category</i>Categoría
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </ul>
         </nav>
 
         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
@@ -195,6 +235,12 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vuejs-dialog@1.4.2/dist/vuejs-dialog.min.js" ></script>
     <script src="https://cdn.ckeditor.com/4.15.0/standard-all/ckeditor.js"></script>
+    <!-- DataTables mdbootstrap 4 js-->
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <!-- moment js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous"></script>
+
 
 
 {% endblock %}

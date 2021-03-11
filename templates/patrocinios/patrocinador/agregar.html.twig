@@ -1,0 +1,44 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mt-4 my-2">
+                <div class="card-body">
+                    <h4 class="card-title">Nuevo Patrocinador</h4>
+                    {{ form_start(form) }}
+                    <div class="form-row">
+                        <div class="form-group md-form col-md-6">
+                            <label for="inputEmail">Nombre Comercial</label>
+                            {{ form_widget(form.nombreComercial) }}
+                        </div>
+                        <div class="form-group md-form col-md-6">
+                            <label for="inputRFC">RFC</label>
+                            {{ form_widget(form.rfc) }}
+                        </div>
+                    </div>
+                    <div class="form-group md-form">
+                        <label for="inputRazonSocial">Nombre o Razón Social</label>
+                        {{ form_widget(form.nombre) }}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12 md-form">
+                            <label for="inputCorreo">Correo Electronico</label>
+                            {{ form_widget(form.correo) }}
+                        </div>
+                    </div>
+                    <div class="form-group md-form">
+                        <div class="custom-file">
+                            {{ form_widget(form.IcLogo) }}
+                            <label class="custom-file-label" for="validatedInputGroupCustomFile">Imagen de 200 x 200 pixeles y Max 2MB...</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-light" onClick="window.history.back();" type="button">Cancelar</button>
+                    <button type="submit" class="btn btn-dark-green float-right">Agregar</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

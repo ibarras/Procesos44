@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    {#{% for message in app.flashes('success') %}
+        <div class="alert alert-success text-center bg-success white-text">
+            {{ message }}
+        </div>
+    {% endfor %}#}
+    <div class="row">
+        <div class="col-sm-12 tablePanel">
+            <div class="card mt-4 my-4 ">
+                <div class="card-body">
+                    <h5 class="card-title font-weight-bolder d-inline-block">Patrocinadores</h5>
+                    <a href="{{ path('agregar_patrocinador') }}" class="btn btn-sm btn-dark-green m-auto float-right"><i class="fas fa-plus mr-1"></i>Agregar</a>
+                    {% if patrocinadores %}
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th class="table-title">Logo</th>
+                                <th class="table-title">Nombre</th>
+                                <th class="table-title">RFC</th>
+                                <th class="table-title">Correo</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for patrocinador in patrocinadores %}
+                                <tr>
+                                    <th>
+                                        <img class="logo-patrocinador" src="{{ asset('uploads/imagen/logos/' ~ patrocinador.logo) }}" alt="{{ patrocinador.logo }}">
+                                    </th>
+                                    <th>{{ patrocinador.nombreComercial }}</th>
+                                    <th>{{ patrocinador.rfc }}</th>
+                                    <th>{{ patrocinador.correo }}</th>
+                                    <th><a href="{{ path('editar_patrocinador', {'id' : patrocinador.id }) }}" class="btn btn-sm btn-yellow m-auto"><i class="fas fa-edit mr-1"></i>Editar</a></th>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <h4 class="mt-4 text-center">Sin Patrocinadores Registrados</h4>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

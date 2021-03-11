@@ -1,0 +1,50 @@
+#Rutas para control de pagos de patrocinadores
+
+control_pagos_inicio_usuario_index:
+    path: /control-pagos-patrocinadores
+    controller: App\Controller\Patrocinios\IcDefaultController::index
+
+#Patrocinadores
+
+lista_patrocinadores:
+    path: /patrocinadores
+    controller: App\Controller\Patrocinios\IcPatrocinadorController::listarPatrocinadoresPorUsuario
+
+agregar_patrocinador:
+    path: /nuevo-patrocinador
+    controller: App\Controller\Patrocinios\IcPatrocinadorController::agregarPatrocinador
+
+editar_patrocinador:
+    path: /{id}/editar-patrocinador
+    controller: App\Controller\Patrocinios\IcPatrocinadorController::editarPatrocinador
+
+
+#Pagos proyectados
+
+lista_pagos_proyectados:
+    path: /pagos-proyectados
+    controller: App\Controller\Patrocinios\IcPagoProyectadoController::listarPagosProyectados
+
+agregar_pago_proyectado:
+    path: /nuevo-pago-proyectado
+    controller: App\Controller\Patrocinios\IcPagoProyectadoController::agregarPagoProyectado
+
+editar_pago_proyectado:
+    path: /{id}/editar-pago-proyectado
+    controller: App\Controller\Patrocinios\IcPagoProyectadoController::editarPagoProyectado
+
+
+
+#Depositos(pagos reales)
+
+lista_depositos:
+    path: /depositos
+    controller: App\Controller\Patrocinios\IcPagoController::listarDepositos
+
+agregar_deposito:
+    path: /{id}/nuevo-deposito
+    controller: App\Controller\Patrocinios\IcPagoController::agregarDeposito
+
+depositos_pago_proyectado:
+    path: /pago-proyectado/{id}/depositos
+    controller: App\Controller\Patrocinios\IcPagoController::depositosPagoProyectado

@@ -1,0 +1,29 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card mt-4 my-2">
+                <div class="card-body">
+                    <h5 class="card-title">Nuevo Depósito</h5>
+                    {{ form_start(form) }}
+                    <div class="form-group md-form">
+                        <label for="inputRazonSocial">Monto</label>
+                        {{ form_widget(form.monto) }}
+                    </div>
+                    <label for="custom-file-input">Comprobante de Pago</label>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            {{ form_widget(form.IcComprobante) }}
+                            <label class="custom-file-label" for="validatedInputGroupCustomFile">Imagen de 200 x 200 pixeles y Max 2MB...</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-light" onClick="window.history.back();" type="button">Cancelar</button>
+                    <button type="submit" class="btn btn-dark-green float-right">Guardar</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
